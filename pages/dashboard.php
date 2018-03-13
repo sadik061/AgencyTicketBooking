@@ -1,4 +1,4 @@
-<?php include 'pages/templates/head.html'; ?>
+<?php include '../pages/templates/head.html'; ?>
 
 
 
@@ -7,8 +7,10 @@
 
 
 <?php
-    include 'pages/templates/headermenu.html';
-    include 'pages/templates/sidemenu.html';
+
+    include '../pages/templates/headermenu.html';
+    include '../pages/templates/sidemenu.html';
+    include '../pages/templates/footer.html';
 ?>
 
 
@@ -22,7 +24,7 @@
 </div>
 
 
-<?php include 'pages/templates/footer.html'; ?>
+
 
 
 
