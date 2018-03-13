@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php  session_start();
 
+?>
 <head>
 
     <meta charset="utf-8">
@@ -38,8 +40,7 @@
     if(isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
         // true then header redirect it to the home page directly
     {
-
-        echo '<script type="text/javascript"> window.open("../dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
+        echo '<script type="text/javascript"> window.open("pages/dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
         exit();
         /* Redirect browser */
 
