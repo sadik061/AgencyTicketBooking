@@ -33,7 +33,18 @@
 </head>
 
 <body>
+<?php
 
+    if(isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
+        // true then header redirect it to the home page directly
+    {
+
+        echo '<script type="text/javascript"> window.open("../dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
+        exit();
+        /* Redirect browser */
+
+    }
+?>
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -42,7 +53,7 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form method="post" role="form" action="../AgencyTicketBooking/pages/scripts/login.php">
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
@@ -55,17 +66,20 @@
                                         <input name="remember" type="checkbox" value="Remember Me">Remember Me
                                     </label>
                                 </div>
+                                <div class="form-group">
+                                    <input class="btn btn-lg btn-success btn-block" type="submit" name="login" value="login">
+                                </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="pages/dashboard.php" class="btn btn-lg btn-success btn-block">Login</a>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                                <!--  <a href="pages/dashboard.php" class="btn btn-lg btn-success btn-block">Login</a> -->
+                             </fieldset>
+                         </form>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
 
-    <!-- jQuery -->
+     <!-- jQuery -->
     <script src="../AgencyTicketBooking/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
