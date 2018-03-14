@@ -23,7 +23,7 @@
     // true then header redirect it to the home page directly
   {
       echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
-     exit();
+      exit();
     /* Redirect browser */
 
   }
