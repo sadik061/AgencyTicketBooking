@@ -1,10 +1,19 @@
 <?php
+session_start();
 /**
  * Created by PhpStorm.
  * User: putuguna
  * Date: 1/25/2017
  * Time: 10:33 AM
  */
+if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
+    // true then header redirect it to the home page directly
+{
+    echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+    exit();
+    /* Redirect browser */
+
+}
 require_once __DIR__ . '/Connection.php';
 class DisplayJsonFood{
     function getAllJsonFood(){
@@ -18,9 +27,11 @@ class DisplayJsonFood{
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
-            foreach($result as $data){
+            foreach($result as $data)
+            {
                 array_push($jsonFood,
-                    array('id'=>$data['id'],
+                    array(
+                        'input_id'=>$data['input_id'],
                         'Name'=>$data['Name'],
                         'Cell_No'=>$data['Cell_No'],
 			            'Fare'=>$data['Fare'],
@@ -48,5 +59,16 @@ class DisplayJsonFood{
         }
     }
 }
-$json = new DisplayJsonFood();
-$json->getAllJsonFood();
+if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
+    // true then header redirect it to the home page directly
+{
+    $json = new DisplayJsonFood();
+    $json->getAllJsonFood();
+}else
+{
+    $response["success"] = 0;
+    $response["message"] = "Bad Request";
+    echo json_encode($response);
+    /* Redirect browser */
+}
+

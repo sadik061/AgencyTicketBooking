@@ -6,6 +6,14 @@
  * Time: 10:54 AM
  */
 // include db connect class
+if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
+    // true then header redirect it to the home page directly
+{
+    echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+    exit();
+    /* Redirect browser */
+
+}
 require_once __DIR__ . '/Connection.php';
 class InsertDetails{
     function startInsertDetails(){
@@ -54,7 +62,7 @@ class InsertDetails{
         }
     }
 }
-if(isset($_POST['insert_main_data']))   // it checks whether the user clicked login button or not
+if(isset($_POST['insert_main_data']) && !isset($_SESSION['loggedIn']))   // it checks whether the user clicked login button or not
 {
     $insert = new InsertDetails();
     $insert->startInsertDetails();

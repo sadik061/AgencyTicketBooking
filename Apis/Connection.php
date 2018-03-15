@@ -5,6 +5,7 @@
  * Date: 1/24/2017
  * Time: 10:13 AM
  */
+
 class Connection{
     function getConnection(){
         $host       = "localhost";
@@ -20,4 +21,5 @@ class Connection{
         }
     }
 }
+
 
