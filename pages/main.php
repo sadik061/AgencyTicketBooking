@@ -67,20 +67,20 @@
       </div>
           <div class="panel-body">
               <div class="row">
-                  <div class="col-lg-5">
+                  <div class="col-lg-5" style="padding-top: 3.5%;">
                       <form role="form">
                         <div class="form-group input-group">
-                            <span class="input-group-addon">Fare</span>
+                            <span class="input-group-addon" style="padding: 6px 12%;">Fare</span>
                             <input type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
-                            <span class="input-group-addon">Paid</span>
+                            <span class="input-group-addon" style="padding: 6px 12%;">Paid</span>
                             <input type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
-                            <span class="input-group-addon">Due</span>
+                            <span class="input-group-addon" style="padding: 6px 12%;">Due</span>
                             <input type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
@@ -146,11 +146,11 @@
                               <input class="form-control">
                           </div>
                           <div class="form-group">
-                              <label style="width: 38%;">Date</label>
+                              <label style="width: 31%;">Date</label>
                               <input class="datepicker">
                           </div>
                           <div class="form-group">
-                              <label style="width: 38%;">Flown Date</label>
+                              <label style="width: 31%;">Flown Date</label>
                               <input class="datepicker">
                           </div>
 
