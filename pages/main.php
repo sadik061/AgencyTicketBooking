@@ -70,17 +70,17 @@
                   <div class="col-lg-5" style="padding-top: 3.5%;">
                       <form role="form">
                         <div class="form-group input-group">
-                            <span class="input-group-addon" style="padding: 6px 12%;">Fare</span>
+                            <span class="input-group-addon" style="padding: 6px 34px;">Fare</span>
                             <input type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
-                            <span class="input-group-addon" style="padding: 6px 12%;">Paid</span>
+                            <span class="input-group-addon" style="padding: 5px 34px;">Paid</span>
                             <input type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
-                            <span class="input-group-addon" style="padding: 6px 12%;">Due</span>
+                            <span class="input-group-addon" style="padding: 5px 35px;">Due</span>
                             <input type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
