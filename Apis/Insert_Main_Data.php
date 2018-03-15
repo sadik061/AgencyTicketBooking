@@ -53,6 +53,7 @@ class InsertDetails{
             $response["success"] = 0;
             $response["message"] = "Failed while insert data";
             echo json_encode($response);
+
         }
     }
 }
