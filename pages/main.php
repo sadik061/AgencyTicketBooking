@@ -30,11 +30,9 @@
 
   ?>
 
-<div class="panel panel-default">
   <div class="col-lg-12">
                       <h1 class="page-header">Add New Entry</h1>
                   </div>
-  <div class="panel-body">
 <div class="col-lg-8" >
   <div class="panel panel-default">
       <div class="panel-heading">
@@ -115,8 +113,7 @@
       <!-- /.panel-body -->
   </div>
 
-  <button type="submit" class="btn btn-default btn-primary">Submit Button</button>
-  <button type="reset" class="btn btn-default btn-primary">Reset Button</button>
+
 </div>
 
 
@@ -129,6 +126,13 @@
               <div class="row">
                   <div class="col-lg-11">
                       <form role="form">
+                          <div class="form-group">
+                              <label style="width: 31%;">Date</label>
+                              <input class="datepicker">
+                          <div class="form-group">
+                              <label style="width: 31%;">Flown Date</label>
+                              <input class="datepicker">
+                          </div>
                           <div class="form-group">
                               <label>PNR</label>
                               <input class="form-control">
@@ -145,14 +149,7 @@
                               <label>Airlines</label>
                               <input class="form-control">
                           </div>
-                          <div class="form-group">
-                              <label style="width: 31%;">Date</label>
-                              <input class="datepicker">
-                          </div>
-                          <div class="form-group">
-                              <label style="width: 31%;">Flown Date</label>
-                              <input class="datepicker">
-                          </div>
+
 
                       </form>
                     </div>
@@ -165,11 +162,13 @@
 
 </div>
 
+<button type="submit" class="btn btn-default btn-primary">SUBMIT</button>
+<button type="reset" class="btn btn-default btn-primary">RESET</button>
 
+</div>
 
-</div
 </div>
-</div>
+
 
 
 
