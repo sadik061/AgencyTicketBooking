@@ -1,13 +1,6 @@
 <?php
 session_start();
-/**
- * Created by PhpStorm.
- * User: putuguna
- * Date: 1/24/2017
- * Time: 10:54 AM
- */
 // include db connect class
-
 require_once __DIR__ . '/Connection.php';
 class InsertDetails{
     function startInsertDetails(){
@@ -17,8 +10,8 @@ class InsertDetails{
         $response = array();
         $Name   = $_POST['Name'];
         $Cell_No   = $_POST['Cell_No'];
-	    $Fare   = $_POST['Fare'];
-	    $Paid  = $_POST['Paid'];
+        $Fare   = $_POST['Fare'];
+        $Paid  = $_POST['Paid'];
         $Due  = $_POST['Due'];
         $Commission  = $_POST['Commission'];
         $Ticket_By  = $_POST['Ticket_By'];
@@ -31,14 +24,25 @@ class InsertDetails{
         $Route  = $_POST['Route'];
         $Airlines  = $_POST['Airlines'];
         try{
-            if(!empty($Name) && !empty($Cell_No) && !empty($Fare) && !empty($Paid) && !empty($Due)&& !empty($Commission)&& !empty($Ticket_By)&&
-                !empty($Comment)&& !empty($Point)&& !empty($Date)&& !empty($Flown_Date)&& !empty($Pnr)&& !empty($Pax)&& !empty($Route)&& !empty($Airlines)){
+          /*
+          echo $Name." 2-".$Cell_No." 3-".$Fare." 4-".$Paid." 5-".$Due." 6-".$Commission." 7-".$Ticket_By
+                ." 8-".$Comment." 9-".$Point." 10-"
+                .$Date." 11-".$Flown_Date." 12-".$Pnr." 13-".
+                $Pax." 14-".$Route." 15-".$Airlines;
+
+          echo !empty($Name) . !empty($Cell_No) .!empty($Fare) . !empty($Paid) . !empty($Due). !empty($Commission). !empty($Ticket_By).
+                !empty($Comment). !empty($Point).!empty($Date). !empty($Flown_Date). !empty($Pnr). !empty($Pax). !empty($Route). !empty($Airlines);
+            */
+          //isset for int numbers they can be 0
+            //!empty values can't be 0
+            if(!empty($Name) && !empty($Cell_No) && isset($Fare) && isset($Paid) && isset($Due)&& isset($Commission)&& !empty($Ticket_By)&&
+                !empty($Comment)&& isset($Point)&& !empty($Date)&& !empty($Flown_Date)&& !empty($Pnr)&& !empty($Pax)&& !empty($Route)&& !empty($Airlines)){
+
                 $sqlInsert = "INSERT INTO maindata (input_id, Name, Cell_No, Fare, Paid, Due, Commission, Ticket_By, Comment,
                 Point, Date, Flown_Date, Pnr, Pax, Route, Airlines) VALUES (0, '$Name', '$Cell_No', '$Fare', '$Paid', '$Due', '$Commission',
                  '$Ticket_By', '$Comment', '$Point', '$Date', '$Flown_Date', '$Pnr', '$Pax', '$Route', '$Airlines')";
                 $conn->exec($sqlInsert);
             }
-
         }catch (PDOException $e){
             echo "Error while inserting ".$e->getMessage();
         }
@@ -53,7 +57,6 @@ class InsertDetails{
             $response["success"] = 0;
             $response["message"] = "Failed while insert data";
             echo json_encode($response);
-
         }
     }
 }
@@ -68,4 +71,3 @@ else
     $response["message"] = "Bad Request";
     echo json_encode($response);
 }
-
