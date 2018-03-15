@@ -44,11 +44,11 @@
                       <form role="form">
                           <div class="col-xs-8">
                               <label>Name</label>
-                              <input class="form-control">
+                              <input id="name" class="form-control">
                           </div>
                           <div class="col-xs-4">
                               <label>Cell No.</label>
-                              <input class="form-control" placeholder="Enter text">
+                              <input id="cellNo" class="form-control" placeholder="Enter text">
                           </div>
                       </form>
                     </div>
@@ -69,22 +69,22 @@
                       <form role="form">
                         <div class="form-group input-group">
                             <span class="input-group-addon" style="padding: 6px 34px;">Fare</span>
-                            <input type="text" class="form-control">
+                            <input id="fare" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon" style="padding: 5px 34px;">Paid</span>
-                            <input type="text" class="form-control">
+                            <input id="paid" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon" style="padding: 5px 35px;">Due</span>
-                            <input type="text" class="form-control">
+                            <input id="due" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon">Commision</span>
-                            <input type="text" class="form-control">
+                            <input id="commision" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                       </form>
@@ -94,15 +94,15 @@
                         <form role="form">
                             <div class="form-group">
                                 <label>Ticket By</label>
-                                <input class="form-control">
+                                <input id="ticketBy" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Comment</label>
-                                <input class="form-control">
+                                <input id="comment" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Point</label>
-                                <input class="form-control">
+                                <input id="point" class="form-control">
                             </div>
                         </form>
                       </div>
@@ -128,26 +128,26 @@
                       <form role="form">
                           <div class="form-group">
                               <label style="width: 31%;">Date</label>
-                              <input class="datepicker">
+                              <input id="date" class="datepicker">
                           <div class="form-group">
                               <label style="width: 31%;">Flown Date</label>
-                              <input class="datepicker">
+                              <input id="flownDate" class="datepicker">
                           </div>
                           <div class="form-group">
                               <label>PNR</label>
-                              <input class="form-control">
+                              <input id="pnr" class="form-control">
                           </div>
                           <div class="form-group">
                               <label>PAX</label>
-                              <input class="form-control">
+                              <input id="pax" class="form-control">
                           </div>
                           <div class="form-group">
                               <label>Route</label>
-                              <input class="form-control">
+                              <input id="route" class="form-control">
                           </div>
                           <div class="form-group">
                               <label>Airlines</label>
-                              <input class="form-control">
+                              <input id="airline" class="form-control">
                           </div>
 
 
@@ -162,15 +162,23 @@
 
 </div>
 
-<button type="submit" class="btn btn-default btn-primary">SUBMIT</button>
-<button type="reset" class="btn btn-default btn-primary">RESET</button>
+<button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
+<button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
 
 </div>
 
 </div>
 
 
+  <script type="text/javascript">
+     function reset() {
+         var allInputFields=document.getElementsByTagName("input");
+         for (var i = 1; i < allInputFields.length; i++) {
+             allInputFields[i].value="";
+         }
 
+     }
+  </script>
 
 
 </body>
