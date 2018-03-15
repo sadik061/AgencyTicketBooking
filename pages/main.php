@@ -50,7 +50,7 @@
                               <label>Cell No.</label>
                               <input id="cellNo" class="form-control" placeholder="Enter text">
                           </div>
-                      </form>
+
                     </div>
                   <!-- /.col-lg-6 (nested) -->
               </div>
@@ -66,7 +66,7 @@
           <div class="panel-body">
               <div class="row">
                   <div class="col-lg-5" style="padding-top: 3.5%;">
-                      <form role="form">
+
                         <div class="form-group input-group">
                             <span class="input-group-addon" style="padding: 6px 34px;">Fare</span>
                             <input id="fare" type="text" class="form-control">
@@ -87,11 +87,11 @@
                             <input id="commision" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
-                      </form>
+
                     </div>
 
                     <div class="col-lg-7">
-                        <form role="form">
+
                             <div class="form-group">
                                 <label>Ticket By</label>
                                 <input id="ticketBy" class="form-control">
@@ -104,7 +104,7 @@
                                 <label>Point</label>
                                 <input id="point" class="form-control">
                             </div>
-                        </form>
+
                       </div>
                   <!-- /.col-lg-6 (nested) -->
               </div>
@@ -125,7 +125,7 @@
           <div class="panel-body">
               <div class="row">
                   <div class="col-lg-11">
-                      <form role="form">
+
                           <div class="form-group">
                               <label style="width: 31%;">Date</label>
                               <input id="date" class="datepicker">
@@ -149,7 +149,8 @@
                               <label>Airlines</label>
                               <input id="airline" class="form-control">
                           </div>
-
+                          <button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
+                          <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
 
                       </form>
                     </div>
@@ -162,8 +163,7 @@
 
 </div>
 
-<button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
-<button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
+
 
 </div>
 
