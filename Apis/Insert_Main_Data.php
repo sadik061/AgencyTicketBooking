@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * Created by PhpStorm.
  * User: putuguna
@@ -6,14 +7,7 @@
  * Time: 10:54 AM
  */
 // include db connect class
-if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
-    // true then header redirect it to the home page directly
-{
-    echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
-    exit();
-    /* Redirect browser */
 
-}
 require_once __DIR__ . '/Connection.php';
 class InsertDetails{
     function startInsertDetails(){
@@ -37,11 +31,11 @@ class InsertDetails{
         $Route  = $_POST['Route'];
         $Airlines  = $_POST['Airlines'];
         try{
-            if(isset($Name) && isset($Cell_No) && isset($Fare) && isset($Paid) && isset($Due)&& isset($Commission)&& isset($Ticket_By)&&
-                isset($Comment)&& isset($Point)&& isset($Date)&& isset($Flown_Date)&& isset($Pnr)&& isset($Pax)&& isset($Route)&& isset($Airlines)){
+            if(!empty($Name) && !empty($Cell_No) && !empty($Fare) && !empty($Paid) && !empty($Due)&& !empty($Commission)&& !empty($Ticket_By)&&
+                !empty($Comment)&& !empty($Point)&& !empty($Date)&& !empty($Flown_Date)&& !empty($Pnr)&& !empty($Pax)&& !empty($Route)&& !empty($Airlines)){
                 $sqlInsert = "INSERT INTO maindata (input_id, Name, Cell_No, Fare, Paid, Due, Commission, Ticket_By, Comment,
                 Point, Date, Flown_Date, Pnr, Pax, Route, Airlines) VALUES (0, '$Name', '$Cell_No', '$Fare', '$Paid', '$Due', '$Commission',
-                 '$Ticket_By', '$Comment', '$Point', '$Date', '$Flown_Date', '$Pnr', '$Pax', '$Route', '$Airlines',)";
+                 '$Ticket_By', '$Comment', '$Point', '$Date', '$Flown_Date', '$Pnr', '$Pax', '$Route', '$Airlines')";
                 $conn->exec($sqlInsert);
             }
 
@@ -62,7 +56,7 @@ class InsertDetails{
         }
     }
 }
-if(isset($_POST['insert_main_data']) && !isset($_SESSION['loggedIn']))   // it checks whether the user clicked login button or not
+if(isset($_POST['insert_main_data']) && isset($_SESSION['loggedIn']))   // it checks whether the user clicked login button or not
 {
     $insert = new InsertDetails();
     $insert->startInsertDetails();

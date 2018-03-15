@@ -6,8 +6,6 @@
 
 <body>
   <div id="wrapper">
-
-
 <?php
 
     include '../pages/templates/headermenu.html';
@@ -32,7 +30,9 @@
 
   <div class="col-lg-12">
                       <h1 class="page-header">Add New Entry</h1>
-                  </div>
+
+  </div>
+    <form role="form" method="post"  action="../Apis/insert_Main_Data.php">
 <div class="col-lg-8" >
   <div class="panel panel-default">
       <div class="panel-heading">
@@ -41,14 +41,14 @@
           <div class="panel-body">
               <div class="row">
                   <div class="col-lg-11">
-                      <form role="form">
+
                           <div class="col-xs-8">
                               <label>Name</label>
-                              <input id="name" class="form-control">
+                              <input id="name" name="Name" class="form-control">
                           </div>
                           <div class="col-xs-4">
                               <label>Cell No.</label>
-                              <input id="cellNo" class="form-control" placeholder="Enter text">
+                              <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
                           </div>
 
                     </div>
@@ -69,22 +69,22 @@
 
                         <div class="form-group input-group">
                             <span class="input-group-addon" style="padding: 6px 34px;">Fare</span>
-                            <input id="fare" type="text" class="form-control">
+                            <input id="fare" name="Fare" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon" style="padding: 5px 34px;">Paid</span>
-                            <input id="paid" type="text" class="form-control">
+                            <input id="paid" name="Paid" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon" style="padding: 5px 35px;">Due</span>
-                            <input id="due" type="text" class="form-control">
+                            <input id="due" name="Due" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon">Commision</span>
-                            <input id="commision" type="text" class="form-control">
+                            <input id="commision" name="Commission" type="text" class="form-control">
                             <span class="input-group-addon">Taka</span>
                         </div>
 
@@ -94,15 +94,15 @@
 
                             <div class="form-group">
                                 <label>Ticket By</label>
-                                <input id="ticketBy" class="form-control">
+                                <input id="ticketBy" name="Ticket_By" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Comment</label>
-                                <input id="comment" class="form-control">
+                                <input id="comment" name="Comment" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Point</label>
-                                <input id="point" class="form-control">
+                                <input id="point" name="Point" class="form-control">
                             </div>
 
                       </div>
@@ -128,31 +128,31 @@
 
                           <div class="form-group">
                               <label style="width: 31%;">Date</label>
-                              <input id="date" class="datepicker">
+                              <input id="date" name="Date" class="datepicker">
                           <div class="form-group">
                               <label style="width: 31%;">Flown Date</label>
-                              <input id="flownDate" class="datepicker">
+                              <input id="flownDate" name="Flown_Date" class="datepicker">
                           </div>
                           <div class="form-group">
                               <label>PNR</label>
-                              <input id="pnr" class="form-control">
+                              <input id="pnr" name="Pnr" class="form-control">
                           </div>
                           <div class="form-group">
                               <label>PAX</label>
-                              <input id="pax" class="form-control">
+                              <input id="pax" name="Pax" class="form-control">
                           </div>
                           <div class="form-group">
                               <label>Route</label>
-                              <input id="route" class="form-control">
+                              <input id="route" name="Route" class="form-control">
                           </div>
                           <div class="form-group">
                               <label>Airlines</label>
-                              <input id="airline" class="form-control">
+                              <input id="airline" name="Airlines" class="form-control">
                           </div>
                           <button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
                           <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
 
-                      </form>
+
                     </div>
                   <!-- /.col-lg-6 (nested) -->
               </div>
@@ -166,12 +166,12 @@
 
 
 </div>
-
+    </form>
 </div>
 
 
   <script type="text/javascript">
-     function reset() {
+      function reset() {
          var allInputFields=document.getElementsByTagName("input");
          for (var i = 1; i < allInputFields.length; i++) {
              allInputFields[i].value="";
