@@ -115,8 +115,8 @@
       <!-- /.panel-body -->
   </div>
 
-  <button type="submit" class="btn btn-default">Submit Button</button>
-  <button type="reset" class="btn btn-default">Reset Button</button>
+  <button type="submit" class="btn btn-default btn-primary">Submit Button</button>
+  <button type="reset" class="btn btn-default btn-primary">Reset Button</button>
 </div>
 
 
@@ -146,12 +146,12 @@
                               <input class="form-control">
                           </div>
                           <div class="form-group">
-                              <label>Date</label>
-                              <input class="form-control">
+                              <label style="width: 38%;">Date</label>
+                              <input class="datepicker">
                           </div>
                           <div class="form-group">
-                              <label>Flown Date</label>
-                              <input class="form-control">
+                              <label style="width: 38%;">Flown Date</label>
+                              <input class="datepicker">
                           </div>
 
                       </form>
