@@ -149,8 +149,7 @@
                               <label>Airlines</label>
                               <input id="airline" name="Airlines" class="form-control">
                           </div>
-                          <button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
-                          <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
+
 
 
                     </div>
@@ -163,9 +162,11 @@
 
 </div>
 
-
+<button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
+<button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
 
 </div>
+
     </form>
 </div>
 
