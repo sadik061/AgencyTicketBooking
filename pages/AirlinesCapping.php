@@ -86,11 +86,7 @@
 
 <!--end of table -->
 
-</div
 
-
-
-<?php include 'pages/templates/footer.html'; ?>
 <script type="text/javascript">
     function reset() {
        var allInputFields=document.getElementsByTagName("input");
