@@ -45,6 +45,7 @@ class InsertDetails{
                 , '$Entry_By', '$Ticket_By', '$Comment', '$Point', '$Date', '$Flown_Date', '$Pnr', '$Pax', '$Route', '$Airlines')";
                 $conn->exec($sqlInsert);
             }
+
         }catch (PDOException $e){
             echo "Error while inserting ".$e->getMessage();
         }
