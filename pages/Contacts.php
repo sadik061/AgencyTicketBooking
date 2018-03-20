@@ -53,10 +53,6 @@
                                     <input id="Point" name="Point" class="form-control" placeholder="Enter text">
                                 </div>
                                 <div class="form-group input-group" style="margin-top: 24px;">
-
-                                    <span class="input-group-addon">Commision</span>
-                                    <input id="commision" name="Commission" type="text" class="form-control">
-
                                     <span class="input-group-addon" style="padding: 6px 34px;">Commission</span>
                                     <input id="Comission" name="Comission"  class="form-control">
                                     <span class="input-group-addon">%</span>
