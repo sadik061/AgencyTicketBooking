@@ -129,23 +129,16 @@
                           <div class="form-group">
                               <label style="width: 31%;">Date</label>
                               <input type="text" id="Date" name="Date" data-field="date" readonly/>
-                              <div id="dtBox"> </div>
-                              <script>
-                                $('#dtBox').DateTimePicker(
-                                  {
-                                    dateFormat: "yyyy-MM-dd"
-                                  }
-                                );
-                              </script>
                           <div class="form-group">
                               <label style="width: 31%;">Flight</label>
                               <!--<input id="flownDate" name="Flown_Date" class="datetime">-->
                               <input type="text"  id="Flown_Date" name="Flown_Date" data-field="datetime" readonly/>
-                              <div id="dtBox"> </div>
+                              <div id="dtBox2"> </div>
                               <script>
-                                $('#dtBox').DateTimePicker(
+                                $('#dtBox2').DateTimePicker(
                                   {
-                                    dateTimeFormat: "yyyy-MM-dd hh:mm:ss"
+                                    dateTimeFormat: "yyyy-MM-dd hh:mm:ss",
+                                      dateFormat: "yyyy-MM-dd"
                                   }
                                 );
                               </script>
