@@ -30,6 +30,8 @@
     /* Redirect browser */
 
   }
+  $_SESSION['From']='0000-00-00';
+  $_SESSION['To']='2999-11-30';
 
   ?>
 <h1>Add your code here</h1>

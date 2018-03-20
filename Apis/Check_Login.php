@@ -31,6 +31,8 @@ class InsertDetails{
                         $_SESSION['Email']=$data['Email'];
                     }
                     $_SESSION['loggedIn']=true;
+
+
                     echo '<script type="text/javascript"> window.open("../pages/dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
                     die();
                 }

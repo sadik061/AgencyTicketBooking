@@ -35,8 +35,42 @@
       <!-- /.col-lg-12 -->
   </div>
 
+
+
   <div class="row">
       <div class="col-lg-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              Ticket Info
+          </div>
+          <form role="form" method="post" onsubmit="load()">
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-lg-11">
+                      <div class="form-group">
+                          <div class="form-group col-lg-4">
+                              <label >From</label>
+                              <input id="flownDateFrom" name="Flown_Date_From"  class="datepicker">
+                          </div>
+                          <div class="form-group col-lg-4">
+                              <label >To</label>
+                              <input id="flownDateTo" name="Flown_Date_To"  class="datepicker">
+                          </div>
+                      </div>
+                      <!-- /.col-lg-6 (nested) -->
+                  </div>
+                  <!-- /.row (nested) -->
+              </div>
+              <!-- /.panel-body -->
+
+              <button type="submit" name="insert_main_data" value="insert_main_data"  class="btn btn-default btn-primary">SUBMIT</button>
+              <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
+              </form>
+          </div>
+          </div>
+
+
+          <div class="col-lg-12">
           <div class="panel panel-default">
               <div class="panel-heading">
                   DataTables Advanced Tables
@@ -71,43 +105,29 @@
   </div>
 </div
 </div>
-<script>
-    alert("script");
-    $.ajax({
-        url: '../Apis/get_Flights.php',
-        dataType: 'json'
-        success: updateTable
-    });
-    function updateTable(json)
-    {
-        var table=document.getElementById('dataTables');
-        var len = json.length;
-        alert(len);
-        for (row = 0; row < len; row++){
-            tr = document.createElement('tr');
+  <script>
 
-                td = document.createElement('td');
-                    tn = document.createTextNode(json[row].Flown_Date);
-                    td.appendChild(tn);
-                    tn = document.createTextNode(json[row].Flown_Time);
-                    td.appendChild(tn);
-                    tn = document.createTextNode(json[row].Pnr);
-                    td.appendChild(tn);
-                    tn = document.createTextNode(json[row].Name);
-                    td.appendChild(tn);
-                    tn = document.createTextNode(json[row].Cell_No);
-                    td.appendChild(tn);
-                    tn = document.createTextNode(json[row].Airlines);
-                    td.appendChild(tn);
-                    tn = document.createTextNode(json[row].Route);
-                    td.appendChild(tn);
-            tr.appendChild(td);
+      function load()
+      {
 
-            table.appendChild(tr);
-        }
+          var From=document.getElementById("flownDateFrom").value;
+          var To=document.getElementById("flownDateTo").value;
+            // alert(From+" "+To);
+          $.ajax({
+              type: 'POST',
+              url: 'Update_Table_Session_Data.php',
+              data: {
+                        From: From,
+                        To: To
+                    },
+              success: function(response) {
+                  window.open("../pages/Flights.php","_self");
+              }
+          });
 
-    }
-</script>
+      }
+
+  </script>
 
 
 </body>

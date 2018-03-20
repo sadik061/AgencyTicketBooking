@@ -18,12 +18,15 @@ class DisplayJsonFood{
         $finalArray=null;
         $status="status";
         $message = "message";
+        $From=$_SESSION['From'];
+        $To=$_SESSION['To'];
+       // echo $From." ".$To;
         try{
-            $sqlQuery = "SELECT * FROM maindata ORDER BY Flown_Date ASC";
+            $sqlQuery = "SELECT * FROM maindata Flown_Date WHERE Flown_Date >= '$From' AND Flown_Date<='$To' ORDER BY Flown_Date ASC";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
-            foreach($result as $data)
+           /* foreach($result as $data)
             {
                 array_push($jsonFood,
                     array(
@@ -36,7 +39,7 @@ class DisplayJsonFood{
                         'Airlines'=>$data['Airlines'],
                         'Route'=>$data['Route']
                     ));
-            }
+            }*/
         }catch (PDOException $e){
             echo "Error while displaying json : " . $e->getMessage();
         }
