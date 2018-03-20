@@ -15,7 +15,7 @@ class InsertDetails{
         $Due  = $_POST['Due'];
         $Commission  = $_POST['Commission'];
         //getting user email via login session just to tract who is inserting data or updating data
-        $Entry_By  =  $_SESSION['user'];
+        $Entry_By  =  $_SESSION['id'];
         $Ticket_By  = $_POST['Ticket_By'];
         $Comment  = $_POST['Comment'];
         $Point  = $_POST['Point'];
@@ -52,14 +52,13 @@ class InsertDetails{
         //cek is the row was inserted or not
         if($sqlInsert){
             //success inserted
-            $response["success"] = 1;
-            $response["message"] = "Details successful inserted!";
-            echo json_encode($response);
+            echo '<script type="text/javascript">alert("Successfully Inserted !!!");</script>';
+            echo '<script type="text/javascript"> window.open("../pages/dashboard.php","_self");</script>';
+            die();
         }else{
-            //failed inserted
-            $response["success"] = 0;
-            $response["message"] = "Failed while insert data";
-            echo json_encode($response);
+            echo '<script type="text/javascript">alert("Error , Try Again!!!");</script>';
+            echo '<script type="text/javascript"> window.open("../pages/main.php","_self");</script>';
+            die();
         }
     }
 }
@@ -70,7 +69,7 @@ if(isset($_POST['insert_main_data']) && isset($_SESSION['loggedIn']))   // it ch
 }
 else
 {
-    $response["success"] = 0;
-    $response["message"] = "Bad Request";
-    echo json_encode($response);
+    echo '<script type="text/javascript">alert("Bad Request !!!");</script>';
+    echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';
+    die();
 }

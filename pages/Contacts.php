@@ -31,7 +31,7 @@
                       <h1 class="page-header">Add new contact</h1>
 
   </div>
-    <form role="form" method="post"  action="../Apis/insert_Main_Data.php">
+    <form role="form" method="post"  action="../Apis/insert_contacts.php">
       <div class="col-lg-12" >
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -50,11 +50,15 @@
                                 </div>
                                 <div class="col-xs-2">
                                     <label>Point</label>
-                                    <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
+                                    <input id="Point" name="Point" class="form-control" placeholder="Enter text">
                                 </div>
                                 <div class="form-group input-group" style="margin-top: 24px;">
+
                                     <span class="input-group-addon">Commision</span>
                                     <input id="commision" name="Commission" type="text" class="form-control">
+
+                                    <span class="input-group-addon" style="padding: 6px 34px;">Commission</span>
+                                    <input id="Comission" name="Comission"  class="form-control">
                                     <span class="input-group-addon">%</span>
                                 </div>
 
@@ -66,7 +70,7 @@
             <!-- /.panel-body -->
         </div>
 
-        <button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
+        <button type="submit" name="insert_contacts_data" value="insert_contacts_data" class="btn btn-default btn-primary">SUBMIT</button>
         <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
       </div>
     </form>
