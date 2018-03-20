@@ -14,6 +14,7 @@
 ?>
 
 <div id="page-wrapper">
+
   <?php
 
   if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
@@ -27,14 +28,14 @@
 
   ?>
   <div class="col-lg-12">
-                      <h1 class="page-header">Contacts</h1>
+                      <h1 class="page-header">Add new contact</h1>
 
   </div>
     <form role="form" method="post"  action="../Apis/insert_Main_Data.php">
       <div class="col-lg-12" >
         <div class="panel panel-default">
             <div class="panel-heading">
-                Add new member
+                Pax Info
             </div>
                 <div class="panel-body">
                     <div class="row">
@@ -52,8 +53,8 @@
                                     <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
                                 </div>
                                 <div class="form-group input-group" style="margin-top: 24px;">
-                                    <span class="input-group-addon" style="padding: 6px 34px;">Commission</span>
-                                    <input id="fare" name="Fare" type="text" class="form-control">
+                                    <span class="input-group-addon">Commision</span>
+                                    <input id="commision" name="Commission" type="text" class="form-control">
                                     <span class="input-group-addon">%</span>
                                 </div>
 
@@ -70,12 +71,8 @@
       </div>
     </form>
 
-
-
-
-
 </div
-
+</div>
 
 
 <?php include 'pages/templates/footer.html'; ?>
