@@ -128,10 +128,27 @@
 
                           <div class="form-group">
                               <label style="width: 31%;">Date</label>
-                              <input id="date" name="Date" class="datepicker">
+                              <input type="text" data-field="date" readonly/>
+                              <div id="dtBox"> </div>
+                              <script>
+                                $('#dtBox').DateTimePicker(
+                                  {
+                                    dateTimeFormat: "yyyy-MM-dd hh:mm:ss"
+                                  }
+                                );
+                              </script>
                           <div class="form-group">
-                              <label style="width: 31%;">Flown Date</label>
-                              <input id="flownDate" name="Flown_Date" class="datepicker">
+                              <label style="width: 31%;">Flight</label>
+                              <!--<input id="flownDate" name="Flown_Date" class="datetime">-->
+                              <input type="text" data-field="datetime" readonly/>
+                              <div id="dtBox"> </div>
+                              <script>
+                                $('#dtBox').DateTimePicker(
+                                  {
+                                    dateTimeFormat: "yyyy-MM-dd hh:mm:ss"
+                                  }
+                                );
+                              </script>
                           </div>
                           <div class="form-group">
                               <label>PNR</label>
