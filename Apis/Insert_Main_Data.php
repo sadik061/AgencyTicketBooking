@@ -14,6 +14,8 @@ class InsertDetails{
         $Paid  = $_POST['Paid'];
         $Due  = $_POST['Due'];
         $Commission  = $_POST['Commission'];
+        //getting user email via login session just to tract who is inserting data or updating data
+        $Entry_By  =  $_SESSION['user'];
         $Ticket_By  = $_POST['Ticket_By'];
         $Comment  = $_POST['Comment'];
         $Point  = $_POST['Point'];
@@ -38,11 +40,12 @@ class InsertDetails{
             if(!empty($Name) && !empty($Cell_No) && isset($Fare) && isset($Paid) && isset($Due)&& isset($Commission)&& !empty($Ticket_By)&&
                 !empty($Comment)&& isset($Point)&& !empty($Date)&& !empty($Flown_Date)&& !empty($Pnr)&& !empty($Pax)&& !empty($Route)&& !empty($Airlines)){
 
-                $sqlInsert = "INSERT INTO maindata (input_id, Name, Cell_No, Fare, Paid, Due, Commission, Ticket_By, Comment,
-                Point, Date, Flown_Date, Pnr, Pax, Route, Airlines) VALUES (0, '$Name', '$Cell_No', '$Fare', '$Paid', '$Due', '$Commission',
-                 '$Ticket_By', '$Comment', '$Point', '$Date', '$Flown_Date', '$Pnr', '$Pax', '$Route', '$Airlines')";
+                $sqlInsert = "INSERT INTO maindata (input_id, Name, Cell_No, Fare, Paid, Due, Commission, Entry_By, Ticket_By, Comment,
+                Point, Date, Flown_Date, Pnr, Pax, Route, Airlines) VALUES (0, '$Name', '$Cell_No', '$Fare', '$Paid', '$Due', '$Commission'
+                , '$Entry_By', '$Ticket_By', '$Comment', '$Point', '$Date', '$Flown_Date', '$Pnr', '$Pax', '$Route', '$Airlines')";
                 $conn->exec($sqlInsert);
             }
+
         }catch (PDOException $e){
             echo "Error while inserting ".$e->getMessage();
         }

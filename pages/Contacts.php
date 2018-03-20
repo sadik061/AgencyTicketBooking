@@ -75,9 +75,6 @@
 </div>
 
 
-<?php include 'pages/templates/footer.html'; ?>
-
-
 
 </body>
 </html>
