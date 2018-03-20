@@ -1,6 +1,10 @@
 <?php include '../pages/templates/head.html'; ?>
 
-<?php  session_start();
+<?php  if(!isset($_SESSION))
+{
+        session_start();
+} ;
+
 
 ?>
 

@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_SESSION))
+{
+    session_start();
+}
 // include db connect class
 require_once __DIR__ . '/Connection.php';
 class InsertDetails{
