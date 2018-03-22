@@ -228,7 +228,7 @@
 
 
               });
-             alert( $('#suggestions').val());
+
           });
 
       });
