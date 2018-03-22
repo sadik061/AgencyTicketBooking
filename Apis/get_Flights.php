@@ -3,12 +3,7 @@ if(!isset($_SESSION))
 {
     session_start();
 }
-/**
- * Created by PhpStorm.
- * User: putuguna
- * Date: 1/25/2017
- * Time: 10:33 AM
- */
+
 require_once __DIR__ . '/Connection.php';
 class DisplayJsonFood{
     function getAllJsonFood(){

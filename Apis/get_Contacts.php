@@ -3,7 +3,6 @@ if(!isset($_SESSION))
 {
     session_start();
 }
-
 require_once __DIR__ . '/Connection.php';
 class DisplayJsonFood{
     function getAllJsonFood(){
@@ -12,8 +11,10 @@ class DisplayJsonFood{
         $jsonFood = array();
         $status="status";
         $message = "message";
+        $name=$_POST['Name'];
+       // echo '<script type="text/javascript">alert("Reached");</script>';
         try{
-            $sqlQuery = "SELECT * FROM maindata";
+            $sqlQuery = "SELECT * FROM contacts WHERE NAME LIKE '$name%'";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -21,31 +22,21 @@ class DisplayJsonFood{
             {
                 array_push($jsonFood,
                     array(
-                        'input_id'=>$data['input_id'],
+                        'id'=>$data['id'],
                         'Name'=>$data['Name'],
                         'Cell_No'=>$data['Cell_No'],
-			            'Fare'=>$data['Fare'],
-                        'Paid'=>$data['Paid'],
-                        'Due'=>$data['Due'],
-                        'Commission'=>$data['Commission'],
-                        'Ticket_By'=>$data['Ticket_By'],
-                        'Comment'=>$data['Comment'],
                         'Point'=>$data['Point'],
-                        'Date'=>$data['Date'],
-                        'Flown_Date'=>$data['Flown_Date'],
-                        'Pnr'=>$data['Pnr'],
-                        'Pax'=>$data['Pax'],
-                        'Route'=>$data['Route'],
-			            'Airlines'=>$data['Airlines']
+                        'Comission'=>$data['Comission'],
+                        'Entry_By'=>$data['Entry_By']
                     ));
             }
         }catch (PDOException $e){
             echo "Error while displaying json : " . $e->getMessage();
         }
         if($sqlQuery){
-            echo json_encode(array("main_data"=>$jsonFood,$status=>1,$message=>"Success"));
+            echo json_encode(array("contacts_data"=>$jsonFood,$status=>1,$message=>"Success"));
         }else{
-            echo json_encode(array("main_data"=>null,$status=>0, $message=>"Failed while displaying Main Data"));
+            echo json_encode(array("contacts_data"=>null,$status=>0, $message=>"Failed while displaying Main Data"));
         }
     }
 }

@@ -97,8 +97,11 @@
 
                             <div class="form-group">
                                 <label>Ticket By</label>
-                                <input id="ticketBy" name="Ticket_By" class="form-control">
+                                <input id="ticketBy" name="Ticket_By" list="suggestions" class="form-control">
                             </div>
+                            <datalist id="suggestions">
+                                <option value="Black">
+                            </datalist>
                             <div class="form-group">
                                 <label>Comment</label>
                                 <input id="comment" name="Comment" class="form-control">
@@ -175,17 +178,61 @@
 
 </div>
 
-<button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
+<button type="submit" name="insert_main_data" value="insert_main_data" onclick="update_Contact_Point()" class="btn btn-default btn-primary">SUBMIT</button>
 <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
 
 </div>
-
     </form>
+
 </div>
 </div>
 
 
   <script type="text/javascript">
+      var contat_id=0;
+      var contact_point=0;
+      $(document).ready(function() {
+          $('#ticketBy').on('input', function() {
+
+              var textValueOfInput = $(this).val();
+              //alert(textValueOfInput);
+              $.ajax({
+                  type: 'POST',
+                  url: '../Apis/get_Contacts.php',
+                  async:false,
+                  data: {
+                      Name: textValueOfInput,
+                  },
+                  error: function (xhr, status) {
+                      alert(status);
+                  },
+                  success: function(data) {
+                      //alert(data);
+                      var obj = JSON.parse(data);
+                      //alert(obj);
+                      var datas=obj.contacts_data;
+                      //alert(datas);
+                      var options = '';
+                      var comission=0;
+                      for (var key in datas) {
+                          if (datas.hasOwnProperty(key)) {
+                              options += '<option value="'+datas[key].Name+'" data-id="'+datas[key].id+'"/>';
+                              comission=datas[key].Comission;
+                              document.getElementById('suggestions').innerHTML = options;
+                              document.getElementById('commision').value = comission;
+                              //alert(key + " -> " + datas[key].Name);
+                          }
+                      }
+
+                  }
+
+
+              });
+             alert( $('#suggestions').val());
+          });
+
+      });
+
       function reset() {
          var allInputFields=document.getElementsByTagName("input");
          for (var i = 1; i < allInputFields.length; i++) {
@@ -193,6 +240,23 @@
          }
 
      }
+     function update_Contact_Point() {
+         var id=0;
+         var point=0;
+         $.ajax({
+             type: 'POST',
+             url: '../Apis/Update_Contact_Point.php',
+             async:false,
+             data: {
+                 id: id,
+                 Point: point,
+             },
+             error: function (xhr, status) {
+                 alert(status);
+             },
+         });
+     }
+
   </script>
 
 
