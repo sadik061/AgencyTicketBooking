@@ -1,10 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: putuguna
- * Date: 1/24/2017
- * Time: 10:54 AM
- */
+if(!isset($_SESSION))
+{
+    session_start();
+}
+
 // include db connect class
 require_once __DIR__ . '/Connection.php';
 class InsertDetails{
@@ -15,6 +14,7 @@ class InsertDetails{
         $response = array();
         $id = $_POST['id'];
         $Point   = $_POST['Point'];
+        //echo $id." ".$Point;
         try{
             if( isset($Point) && isset($id)){
                 $sqlInsert = "UPDATE Contacts SET Point=Point+'$Point' WHERE id='$id'";

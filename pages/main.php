@@ -189,13 +189,15 @@
 
 
   <script type="text/javascript">
-      var contat_id=0;
-      var contact_point=0;
+      var contact_id=undefined;
+      var contact_point=undefined;
       $(document).ready(function() {
+          //for suggesting real time ticket by contacts name
           $('#ticketBy').on('input', function() {
 
               var textValueOfInput = $(this).val();
               //alert(textValueOfInput);
+              //requesting to get all contacts with the starting name in the input field
               $.ajax({
                   type: 'POST',
                   url: '../Apis/get_Contacts.php',
@@ -207,23 +209,36 @@
                       alert(status);
                   },
                   success: function(data) {
-                      //alert(data);
+                      //when found names sending them in datalist for suggetions
+
                       var obj = JSON.parse(data);
-                      //alert(obj);
+
                       var datas=obj.contacts_data;
-                      //alert(datas);
+
                       var options = '';
                       var comission=0;
                       for (var key in datas) {
                           if (datas.hasOwnProperty(key)) {
                               options += '<option value="'+datas[key].Name+'" data-id="'+datas[key].id+'"/>';
                               comission=datas[key].Comission;
-                              document.getElementById('suggestions').innerHTML = options;
-                              document.getElementById('commision').value = comission;
                               //alert(key + " -> " + datas[key].Name);
                           }
                       }
+                      document.getElementById('suggestions').innerHTML = options;
+                      //getting the selected suggetions and searching the comission value for the name and saving in the comission field
+                      $("input[name=Ticket_By]").focusout(function(){
+                          for (var key in datas) {
+                              if (datas.hasOwnProperty(key)) {
+                                  if(datas[key].Name==$(this).val())
+                                  {
+                                      contact_id=datas[key].id;
 
+                                      document.getElementById('commision').value = datas[key].Comission;
+                                      break;
+                                  }
+                              }
+                          }
+                      });
                   }
 
 
@@ -241,19 +256,21 @@
 
      }
      function update_Contact_Point() {
-         var id=0;
-         var point=0;
+         contact_point= document.getElementById('point').value;
          $.ajax({
              type: 'POST',
              url: '../Apis/Update_Contact_Point.php',
              async:false,
              data: {
-                 id: id,
-                 Point: point,
+                 id: contact_id,
+                 Point: contact_point,
              },
              error: function (xhr, status) {
                  alert(status);
              },
+             success: function(data) {
+                 //alert(data);
+             }
          });
      }
 
