@@ -97,6 +97,7 @@
                                 <th>Route</th>
                                 <th>Paid</th>
                                 <th>Due</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>

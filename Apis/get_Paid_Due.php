@@ -79,6 +79,10 @@ class DisplayJsonFood{
                 echo $data['Due'];
                 echo "</td>";
 
+                echo "<td>";
+                echo "<button type=\"button\" class=\"btn btn-outline btn-primary\">Primary</button>";
+                echo "</td>";
+
                 echo "</tr>";
             }
             //echo json_encode(array("user_data"=>$jsonFood,$status=>1,$message=>"Success"));
