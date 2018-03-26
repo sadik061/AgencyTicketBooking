@@ -71,16 +71,16 @@ class DisplayJsonFood{
                 echo $data['Route'];
                 echo "</td>";
 
-                echo "<td>";
+                echo "<td contenteditable='true'>";
                 echo $data['Paid'];
                 echo "</td>";
 
-                echo "<td>";
+                echo "<td contenteditable='true'>";
                 echo $data['Due'];
                 echo "</td>";
-
+                $id= $data['input_id'];
                 echo "<td>";
-                echo "<button type=\"button\" id=\"edit\" class=\"btn btn-outline btn-primary\">Edit</button>";
+                echo "<button type=\"button\" id=\"edit\" class=\"btn btn-outline btn-primary\" onclick=\"updateRow(this,'$id')\">Update</button>";
                 echo "</td>";
 
                 echo "</tr>";

@@ -118,27 +118,33 @@
 </div>
 <script>
 
-    function addRowHandlers() {
-        var table = document.getElementById("dataTables");
-        var rows = table.getElementsByTagName("tr");
-        for (i = 0; i < rows.length; i++) {
-            var currentRow = table.rows[i];
-            var createClickHandler =
-                function(row)
-                {
-                    return function() {
 
-                        var cell = row.getElementsByTagName("td")[1];
-                        var id = cell.innerHTML;
-                        alert("id:" + id);
-                    };
-                };
-
-            currentRow.cells[9].onclick = createClickHandler(currentRow);
-        }
+    function updateRow(t,id) {
+        //alert($(t).closest('tr').index());
+        var rowNumber=$(t).closest('tr').index();
+        var x = document.getElementById("dataTables").rows[rowNumber+1].cells;
+        //alert(x[7].innerHTML);
+        var paid=x[7].innerHTML;
+        var due=x[8].innerHTML;
+        $.ajax({
+            type: 'POST',
+            url: '../Apis/Update_Paid_Due_Amount.php',
+            data: {
+                id:id,
+                Paid: paid,
+                Due: due
+            },
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function(response) {
+               // alert(response);
+                alert("Successfully Updated Paid Due Amount")
+                window.open("../pages/Dues.php","_self");
+            }
+        });
+        //alert(id);
     }
-    window.onload = addRowHandlers();
-
     function load()
     {
 
