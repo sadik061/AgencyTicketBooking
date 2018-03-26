@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Agency Ticiket Booking</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../AgencyTicketBooking/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,10 +40,12 @@
     if(isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
         // true then header redirect it to the home page directly
     {
-        echo '<script type="text/javascript"> window.open("pages/dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
-        exit();
+        if($_SESSION['loggedIn']!=false)
+        {
+            echo '<script type="text/javascript"> window.open("pages/dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
+            exit();
+        }
         /* Redirect browser */
-
     }
 ?>
     <div class="container">

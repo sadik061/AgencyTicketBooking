@@ -6,7 +6,10 @@
  * Time: 4:37 PM
  */
 
-session_start();
+if(!isset($_SESSION))
+{
+    session_start();
+}
 $_SESSION['id']=null;
 $_SESSION['Name']=null;
 $_SESSION['PhoneNo']=null;

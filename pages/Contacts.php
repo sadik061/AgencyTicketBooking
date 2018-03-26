@@ -21,12 +21,20 @@
   <?php
 
   if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
-    // true then header redirect it to the home page directly
+      // true then header redirect it to the home page directly
   {
       echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
       exit();
-    /* Redirect browser */
+      /* Redirect browser */
 
+  }
+  else
+  {
+      if($_SESSION['loggedIn']==false)
+      {
+          echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+          exit();
+      }
   }
 
   ?>

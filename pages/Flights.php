@@ -25,6 +25,14 @@
           /* Redirect browser */
 
       }
+      else
+      {
+          if($_SESSION['loggedIn']==false)
+          {
+              echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+              exit();
+          }
+      }
 
       ?>
 <div id="page-wrapper">
