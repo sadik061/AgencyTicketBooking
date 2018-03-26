@@ -41,7 +41,7 @@
                       <h1 class="page-header">Airlines Capping By Date</h1>
 
   </div>
-    <form role="form" method="post"  action="../Apis/insert_Main_Data.php">
+    <form role="form" method="post"  action="../Apis/insert_Capping.php">
       <div class="col-lg-12" >
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -53,23 +53,23 @@
 
                                 <div class="col-xs-3">
                                     <label>Amount</label>
-                                    <input id="name" name="Name" class="form-control">
+                                    <input id="Amount" name="Amount" class="form-control">
                                 </div>
                                 <div class="col-xs-3">
                                     <label>Airlines.</label>
-                                    <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
+                                    <input id="Airlines" name="Airlines" class="form-control" placeholder="Enter text">
                                 </div>
                                 <div class="col-xs-4">
                                     <label>By</label>
-                                    <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
+                                    <input id="PaymentBy" name="PaymentBy" class="form-control" placeholder="Enter text">
                                 </div>
                                 <div class="col-xs-2">
                                     <label>MCD No.</label>
-                                    <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
+                                    <input id="MCDNo" name="MCDNo" class="form-control" placeholder="Enter text">
                                 </div>
                                 <div class="form-group col-xs-12">
                                     <label style="margin-top:  50px;">Payment Date</label>
-                                    <input id="date" name="Date" class="datepicker">
+                                    <input id="Date" name="Date" class="datepicker">
                                 </div>
 
                           </div>
@@ -80,7 +80,7 @@
             <!-- /.panel-body -->
         </div>
 
-        <button type="submit" name="insert_main_data" value="insert_main_data" class="btn btn-default btn-primary">SUBMIT</button>
+        <button type="submit" name="insert_capping_data" value="insert_capping_data" class="btn btn-default btn-primary">SUBMIT</button>
         <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
       </div>
     </form>
