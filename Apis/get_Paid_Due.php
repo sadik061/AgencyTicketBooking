@@ -80,7 +80,7 @@ class DisplayJsonFood{
                 echo "</td>";
 
                 echo "<td>";
-                echo "<button type=\"button\" class=\"btn btn-outline btn-primary\">Primary</button>";
+                echo "<button type=\"button\" id=\"edit\" class=\"btn btn-outline btn-primary\">Edit</button>";
                 echo "</td>";
 
                 echo "</tr>";
