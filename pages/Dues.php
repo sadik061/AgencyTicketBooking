@@ -102,7 +102,7 @@
                             <tbody>
 
 
-                            <?php include('../Apis/get_Flights.php');  ?>
+                            <?php include('../Apis/get_Paid_Due.php');  ?>
                             </tbody>
                         </table>
                         <!-- /.table-responsive -->
@@ -131,7 +131,7 @@
                 To: To
             },
             success: function(response) {
-                window.open("../pages/Flights.php","_self");
+                window.open("../pages/Dues.php","_self");
             }
         });
 
