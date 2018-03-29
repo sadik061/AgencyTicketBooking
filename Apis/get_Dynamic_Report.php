@@ -11,8 +11,8 @@ class DisplayJsonFood{
         $jsonFood = array();
         $status="status";
         $message = "message";
-        $StartDate=$_POST['StartDate'];
-        $EndDate=$_POST['EndDate'];
+        $StartDate=$_POST['From'];
+        $EndDate=$_POST['To'];
         // echo '<script type="text/javascript">alert("Reached");</script>';
         try{
             $sqlQuery = "SELECT Date,SUM(Fare) as Total_Fare,SUM(Paid) as Total_Paid,

@@ -153,44 +153,81 @@
 
                 <script>
                     var ctx = document.getElementById("myChart").getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                            datasets: [{
-                                label: '# of Votes',
-                                data: [12, 19, 3, 5, 2, 3],
-                                backgroundColor: [
-                                    'rgba(51, 51, 51, 0.2)',
-                                    'rgba(51, 51, 51, 0.2)',
-                                    'rgba(51, 51, 51, 0.2)',
-                                    'rgba(51, 51, 51, 0.2)',
-                                    'rgba(51, 51, 51, 0.2)',
-                                    'rgba(51, 51, 51, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero:true
-                                    }
+                    var myChart=null;
+                    window.onload = function(e){
+                        var default_data={
+                            type: 'line',
+                            data: {
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [{
+                                    label: "My First dataset",
+                                    fillColor: "rgba(220,220,220,0.2)",
+                                    strokeColor: "rgba(220,220,220,1)",
+                                    pointColor: "rgba(220,220,220,1)",
+                                    pointStrokeColor: "#fff",
+                                    pointHighlightFill: "#fff",
+                                    pointHighlightStroke: "rgba(220,220,220,1)",
+                                    data: [65, 59, 80, 81, 56, 55, 40]
                                 }]
+                            },
+                            options: {
+                                responsive: true
                             }
-                        }
-                    });
-                </script>
+                        };
 
+                       myChart = new Chart(ctx,default_data,{animationSteps: 15});
+                    };
+
+
+                    setTimeout(function() {
+                        UpdateData(myChart, [45, 50, 30, 34, 61, 53, 42],['a','b','c','d','e','f'] ,0);
+                    }, 2000);
+
+                    function UpdateData(chart, data,labels, datasetIndex) {
+                        chart.data.datasets[datasetIndex].data = data;
+                        chart.data.labels = labels;
+                        chart.update();
+                    }
+
+                    function load()
+
+                    {
+
+                        var From=document.getElementById("flownDateFrom").value;
+                        var To=document.getElementById("flownDateTo").value;
+                        // alert(From+" "+To);
+                        $.ajax({
+                            type: 'POST',
+                            url: '../Apis/get_Dynamic_Report.php',
+                            data: {
+                                From: From,
+                                To: To
+                            }, error: function (xhr, status) {
+                                alert("error:"+status);
+                            },
+                            success: function(response) {
+
+                                var obj = JSON.parse(response);
+
+                                var datas=obj.Report_data;
+                                var labels=[From];
+                                var main_data=[0];
+                                for (var key in datas) {
+                                    if (datas.hasOwnProperty(key)) {
+                                        labels.push(datas[key].Date);
+                                        main_data.push(datas[key].Total_Sell);
+                                        //alert(key + " -> " + datas[key].Date);
+                                    }
+                                }
+
+                                //alert(labels);
+                                UpdateData(myChart,main_data,labels,0);
+                            }
+                        });
+
+                    }
+
+                </script>
                 <div class="col-md-5">
                     <canvas id="myChart" ></canvas>
                 </div>
