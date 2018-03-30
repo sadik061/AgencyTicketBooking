@@ -51,18 +51,18 @@
                     <div class="panel-heading">
                         Ticket Info
                     </div>
-                    <form role="form" method="post" onsubmit="load()">
+                    <form role="form" method="post" onsubmit="load(); return false;">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-11">
                                     <div class="form-group">
                                         <div class="form-group col-lg-4">
                                             <label >From</label>
-                                            <input id="flownDateFrom" name="Flown_Date_From"  class="datepicker">
+                                            <input id="flownDateFrom" value="2018-03-01" name="Flown_Date_From"  class="datepicker">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label >To</label>
-                                            <input id="flownDateTo" name="Flown_Date_To"  class="datepicker">
+                                            <input id="flownDateTo" value="2018-03-31" name="Flown_Date_To"  class="datepicker">
                                         </div>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
@@ -86,7 +86,7 @@
                                     <i class="fa fa-ticket fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <div class="huge" id="total_sell">0</div>
                                     <div>Total Sell</div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                                     <i class="fa fa-money fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge" id="total_payment">0</div>
                                     <div>Total Payment</div>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                                     <i class="fa fa-bell fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
+                                    <div class="huge" id="total_due">0</div>
                                     <div>Total Due</div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                     <i class="fa fa-credit-card fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge" id="total_capping">0</div>
                                     <div>Total Capping</div>
                                 </div>
                             </div>
@@ -155,12 +155,27 @@
                     var ctx = document.getElementById("myChart").getContext('2d');
                     var myChart=null;
                     window.onload = function(e){
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth()+1; //January is 0!
+                        var yyyy = today.getFullYear();
+                        if(dd<10) {
+                            dd = '0'+dd
+                        }
+
+                        if(mm<10) {
+                            mm = '0'+mm
+                        }
+
+                        today = yyyy + '-' + mm + '-' + dd;
+                        document.getElementById("flownDateFrom").value=today;
+                        document.getElementById("flownDateTo").value=today;
                         var default_data={
                             type: 'line',
                             data: {
-                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                labels: [today],
                                 datasets: [{
-                                    label: "My First dataset",
+                                    label: "Sales Dataset",
                                     fillColor: "rgba(220,220,220,0.2)",
                                     strokeColor: "rgba(220,220,220,1)",
                                     pointColor: "rgba(220,220,220,1)",
@@ -176,23 +191,58 @@
                         };
 
                        myChart = new Chart(ctx,default_data,{animationSteps: 15});
+                        load();
                     };
 
 
-                    setTimeout(function() {
-                        UpdateData(myChart, [45, 50, 30, 34, 61, 53, 42],['a','b','c','d','e','f'] ,0);
-                    }, 2000);
 
-                    function UpdateData(chart, data,labels, datasetIndex) {
+
+                    function UpdateData(chart, data,labels, datasetIndex,total_paid,total_due,total_sell) {
                         chart.data.datasets[datasetIndex].data = data;
                         chart.data.labels = labels;
                         chart.update();
+                        document.getElementById("total_payment").innerHTML = total_paid;
+                        document.getElementById("total_sell").innerHTML = total_sell;
+                        document.getElementById("total_due").innerHTML = total_due;
                     }
+                    function get_Capping()
+                    {
+                        var From=document.getElementById("flownDateFrom").value;
+                        var To=document.getElementById("flownDateTo").value;
+                        // alert(From+" "+To);
+                        $.ajax({
+                            type: 'POST',
+                            url: '../Apis/get_Capping.php',
+                            data: {
+                                From: From,
+                                To: To
+                            }, error: function (xhr, status) {
+                                alert("error:"+status);
+                            },
+                            success: function(response) {
+                               // alert(response);
+                                var obj = JSON.parse(response);
+                                var datas=obj.capping_data;
 
+                                var total_capping=0;
+                               // alert(total_capping);
+                                for (var key in datas) {
+                                    if (datas.hasOwnProperty(key)) {
+
+                                        total_capping+=parseInt(datas[key].Amount);
+
+                                    }
+                                }
+                                document.getElementById("total_capping").innerHTML = total_capping;
+                                //alert(total_capping);
+                            }
+                        });
+
+                    }
                     function load()
 
                     {
-
+                        get_Capping();
                         var From=document.getElementById("flownDateFrom").value;
                         var To=document.getElementById("flownDateTo").value;
                         // alert(From+" "+To);
@@ -208,20 +258,26 @@
                             success: function(response) {
 
                                 var obj = JSON.parse(response);
-
                                 var datas=obj.Report_data;
                                 var labels=[From];
                                 var main_data=[0];
+                                var total_sell=0;
+                                var total_paid=0;
+                                var total_due=0;
+
                                 for (var key in datas) {
                                     if (datas.hasOwnProperty(key)) {
                                         labels.push(datas[key].Date);
                                         main_data.push(datas[key].Total_Sell);
+                                        total_paid+=parseInt(datas[key].Total_Paid);
+                                        total_due+=parseInt(datas[key].Total_Due);
+                                        total_sell+=parseInt(datas[key].Total_Sell);
                                         //alert(key + " -> " + datas[key].Date);
                                     }
                                 }
 
                                 //alert(labels);
-                                UpdateData(myChart,main_data,labels,0);
+                                UpdateData(myChart,main_data,labels,0,total_paid,total_due,total_sell);
                             }
                         });
 
