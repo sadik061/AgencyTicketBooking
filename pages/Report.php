@@ -37,7 +37,7 @@
         }
 
         ?>
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="height: 800px;">
 
             <div class="row">
                 <div class="col-lg-12">
@@ -77,7 +77,148 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="height: 645px;">
+                <div class="col-lg-9 col-md-6">
+
+                    <canvas id="myChart" style="max-width: 80%; height: 459px;"></canvas>
+
+                    <script>
+                        var ctx = document.getElementById("myChart").getContext('2d');
+                        var myChart=null;
+                        window.onload = function(e){
+                            var today = new Date();
+                            var dd = today.getDate();
+                            var mm = today.getMonth()+1; //January is 0!
+                            var yyyy = today.getFullYear();
+                            if(dd<10) {
+                                dd = '0'+dd
+                            }
+
+                            if(mm<10) {
+                                mm = '0'+mm
+                            }
+
+                            today = yyyy + '-' + mm + '-' + dd;
+                            document.getElementById("flownDateFrom").value=today;
+                            document.getElementById("flownDateTo").value=today;
+                            var default_data={
+                                type: 'line',
+                                data: {
+                                    labels: [today],
+                                    datasets: [{
+                                        label: "Sales Dataset",
+                                        fillColor: "rgba(220,220,220,0.2)",
+                                        strokeColor: "rgba(220,220,220,1)",
+                                        pointColor: "rgba(220,220,220,1)",
+                                        pointStrokeColor: "#fff",
+                                        pointHighlightFill: "#fff",
+                                        pointHighlightStroke: "rgba(220,220,220,1)",
+                                        data: [65, 59, 80, 81, 56, 55, 40]
+                                    }]
+                                },
+                                options: {
+                                    responsive: true
+                                }
+                            };
+
+                            myChart = new Chart(ctx,default_data,{animationSteps: 15});
+                            load();
+                        };
+
+
+
+
+                        function UpdateData(chart, data,labels, datasetIndex,total_paid,total_due,total_sell) {
+                            chart.data.datasets[datasetIndex].data = data;
+                            chart.data.labels = labels;
+                            chart.update();
+                            document.getElementById("total_payment").innerHTML = total_paid;
+                            document.getElementById("total_sell").innerHTML = total_sell;
+                            document.getElementById("total_due").innerHTML = total_due;
+                        }
+                        function get_Capping()
+                        {
+                            var From=document.getElementById("flownDateFrom").value;
+                            var To=document.getElementById("flownDateTo").value;
+                            // alert(From+" "+To);
+                            $.ajax({
+                                type: 'POST',
+                                url: '../Apis/get_Capping.php',
+                                data: {
+                                    From: From,
+                                    To: To
+                                }, error: function (xhr, status) {
+                                    alert("error:"+status);
+                                },
+                                success: function(response) {
+                                    // alert(response);
+                                    var obj = JSON.parse(response);
+                                    var datas=obj.capping_data;
+
+                                    var total_capping=0;
+                                    // alert(total_capping);
+                                    for (var key in datas) {
+                                        if (datas.hasOwnProperty(key)) {
+
+                                            total_capping+=parseInt(datas[key].Amount);
+
+                                        }
+                                    }
+                                    document.getElementById("total_capping").innerHTML = total_capping;
+                                    //alert(total_capping);
+                                }
+                            });
+
+                        }
+                        function load()
+
+                        {
+                            get_Capping();
+                            var From=document.getElementById("flownDateFrom").value;
+                            var To=document.getElementById("flownDateTo").value;
+                            // alert(From+" "+To);
+                            $.ajax({
+                                type: 'POST',
+                                url: '../Apis/get_Dynamic_Report.php',
+                                data: {
+                                    From: From,
+                                    To: To
+                                }, error: function (xhr, status) {
+                                    alert("error:"+status);
+                                },
+                                success: function(response) {
+
+                                    var obj = JSON.parse(response);
+                                    var datas=obj.Report_data;
+                                    var labels=[From];
+                                    var main_data=[0];
+                                    var total_sell=0;
+                                    var total_paid=0;
+                                    var total_due=0;
+
+                                    for (var key in datas) {
+                                        if (datas.hasOwnProperty(key)) {
+                                            labels.push(datas[key].Date);
+                                            main_data.push(datas[key].Total_Sell);
+                                            total_paid+=parseInt(datas[key].Total_Paid);
+                                            total_due+=parseInt(datas[key].Total_Due);
+                                            total_sell+=parseInt(datas[key].Total_Sell);
+                                            //alert(key + " -> " + datas[key].Date);
+                                        }
+                                    }
+
+                                    //alert(labels);
+                                    UpdateData(myChart,main_data,labels,0,total_paid,total_due,total_sell);
+                                }
+                            });
+
+                        }
+
+                    </script>
+                    <div class="col-md-5">
+                        <canvas id="myChart" ></canvas>
+                    </div>
+                </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -142,151 +283,13 @@
 
                     </div>
                 </div>
+
             </div>
 
 
 
 
-            <div class="col-lg-8">
 
-                <canvas id="myChart" style="max-width: 500px;"></canvas>
-
-                <script>
-                    var ctx = document.getElementById("myChart").getContext('2d');
-                    var myChart=null;
-                    window.onload = function(e){
-                        var today = new Date();
-                        var dd = today.getDate();
-                        var mm = today.getMonth()+1; //January is 0!
-                        var yyyy = today.getFullYear();
-                        if(dd<10) {
-                            dd = '0'+dd
-                        }
-
-                        if(mm<10) {
-                            mm = '0'+mm
-                        }
-
-                        today = yyyy + '-' + mm + '-' + dd;
-                        document.getElementById("flownDateFrom").value=today;
-                        document.getElementById("flownDateTo").value=today;
-                        var default_data={
-                            type: 'line',
-                            data: {
-                                labels: [today],
-                                datasets: [{
-                                    label: "Sales Dataset",
-                                    fillColor: "rgba(220,220,220,0.2)",
-                                    strokeColor: "rgba(220,220,220,1)",
-                                    pointColor: "rgba(220,220,220,1)",
-                                    pointStrokeColor: "#fff",
-                                    pointHighlightFill: "#fff",
-                                    pointHighlightStroke: "rgba(220,220,220,1)",
-                                    data: [65, 59, 80, 81, 56, 55, 40]
-                                }]
-                            },
-                            options: {
-                                responsive: true
-                            }
-                        };
-
-                       myChart = new Chart(ctx,default_data,{animationSteps: 15});
-                        load();
-                    };
-
-
-
-
-                    function UpdateData(chart, data,labels, datasetIndex,total_paid,total_due,total_sell) {
-                        chart.data.datasets[datasetIndex].data = data;
-                        chart.data.labels = labels;
-                        chart.update();
-                        document.getElementById("total_payment").innerHTML = total_paid;
-                        document.getElementById("total_sell").innerHTML = total_sell;
-                        document.getElementById("total_due").innerHTML = total_due;
-                    }
-                    function get_Capping()
-                    {
-                        var From=document.getElementById("flownDateFrom").value;
-                        var To=document.getElementById("flownDateTo").value;
-                        // alert(From+" "+To);
-                        $.ajax({
-                            type: 'POST',
-                            url: '../Apis/get_Capping.php',
-                            data: {
-                                From: From,
-                                To: To
-                            }, error: function (xhr, status) {
-                                alert("error:"+status);
-                            },
-                            success: function(response) {
-                               // alert(response);
-                                var obj = JSON.parse(response);
-                                var datas=obj.capping_data;
-
-                                var total_capping=0;
-                               // alert(total_capping);
-                                for (var key in datas) {
-                                    if (datas.hasOwnProperty(key)) {
-
-                                        total_capping+=parseInt(datas[key].Amount);
-
-                                    }
-                                }
-                                document.getElementById("total_capping").innerHTML = total_capping;
-                                //alert(total_capping);
-                            }
-                        });
-
-                    }
-                    function load()
-
-                    {
-                        get_Capping();
-                        var From=document.getElementById("flownDateFrom").value;
-                        var To=document.getElementById("flownDateTo").value;
-                        // alert(From+" "+To);
-                        $.ajax({
-                            type: 'POST',
-                            url: '../Apis/get_Dynamic_Report.php',
-                            data: {
-                                From: From,
-                                To: To
-                            }, error: function (xhr, status) {
-                                alert("error:"+status);
-                            },
-                            success: function(response) {
-
-                                var obj = JSON.parse(response);
-                                var datas=obj.Report_data;
-                                var labels=[From];
-                                var main_data=[0];
-                                var total_sell=0;
-                                var total_paid=0;
-                                var total_due=0;
-
-                                for (var key in datas) {
-                                    if (datas.hasOwnProperty(key)) {
-                                        labels.push(datas[key].Date);
-                                        main_data.push(datas[key].Total_Sell);
-                                        total_paid+=parseInt(datas[key].Total_Paid);
-                                        total_due+=parseInt(datas[key].Total_Due);
-                                        total_sell+=parseInt(datas[key].Total_Sell);
-                                        //alert(key + " -> " + datas[key].Date);
-                                    }
-                                }
-
-                                //alert(labels);
-                                UpdateData(myChart,main_data,labels,0,total_paid,total_due,total_sell);
-                            }
-                        });
-
-                    }
-
-                </script>
-                <div class="col-md-5">
-                    <canvas id="myChart" ></canvas>
-                </div>
 
 
 
