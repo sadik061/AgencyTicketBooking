@@ -42,7 +42,7 @@
             <h1 class="page-header">Add new Airline</h1>
 
         </div>
-        <form role="form" method="post"  action="../Apis/insert_contacts.php">
+        <form role="form" method="post"  action="../Apis/insert_Airlines.php">
             <div class="col-lg-12" >
                 <div class="panel panel-default">
                     <div class="panel-heading">

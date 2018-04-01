@@ -170,7 +170,10 @@
                           </div>
                           <div class="form-group">
                               <label>Airlines</label>
-                              <input id="airline" name="Airlines" class="form-control">
+                              <input id="airline" name="Airlines" list="AirlineSuggestions"  class="form-control">
+                              <datalist id="AirlineSuggestions">
+                                  <option value="Black">
+                              </datalist>
                           </div>
 
 
@@ -252,8 +255,80 @@
               });
 
           });
+          //checking if pnr already in the database or not
+          $("input[name=Pnr]").focusout(function(){
+              var pnr= document.getElementById('pnr').value;
+              //alert(pnr);
+              $.ajax({
+                  type: 'POST',
+                  url: '../Apis/Check_Pnr_Validity.php',
+                  async:false,
+                  data: {
+                      Pnr: pnr,
+                  },
+                  error: function (xhr, status) {
+                      alert(status);
+                  },
+                  success: function(data) {
+                     // alert(data);
+                      var obj = JSON.parse(data);
+                      if(obj["success"]==1)
+                      {
+                          //alert("Unique");
+                          //alert(obj["message"]);
+                      }
+                      else {
+                          alert(obj["message"]);
+                      }
+
+                  }
+
+
+              });
+          });
+          //getting airlines names suggetions
+          $('#airline').on('input', function() {
+
+              var textValueOfInput = $(this).val();
+              //alert(textValueOfInput);
+              //requesting to get all contacts with the starting name in the input field
+              $.ajax({
+                  type: 'POST',
+                  url: '../Apis/get_Airlines.php',
+                  async:false,
+                  data: {
+                      Name: textValueOfInput,
+                  },
+                  error: function (xhr, status) {
+                      alert(status);
+                  },
+                  success: function(data) {
+                      //when found names sending them in datalist for suggetions
+
+                      var obj = JSON.parse(data);
+
+                      var datas=obj.airlines_data;
+
+                      var options = '';
+                      for (var key in datas) {
+                          if (datas.hasOwnProperty(key)) {
+                              options += '<option value="'+datas[key].Name+'" data-id="'+datas[key].id+'"/>';
+                              //alert(key + " -> " + datas[key].Name);
+                          }
+                      }
+                      document.getElementById('AirlineSuggestions').innerHTML = options;
+                  }
+
+
+              });
+
+          });
 
       });
+
+
+
+
 
       function reset() {
          var allInputFields=document.getElementsByTagName("input");
@@ -262,6 +337,10 @@
          }
 
      }
+
+
+
+
      function update_Contact_Point() {
          contact_point= document.getElementById('point').value;
          $.ajax({
