@@ -17,7 +17,7 @@ class InsertDetails{
         //echo $id." ".$Point;
         try{
             if( isset($Point) && isset($id)){
-                $sqlInsert = "UPDATE Contacts SET Point=Point+'$Point' WHERE id='$id'";
+                $sqlInsert = "UPDATE contacts SET Point=Point+'$Point' WHERE id='$id'";
                 $conn->exec($sqlInsert);
 
             }

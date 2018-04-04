@@ -15,26 +15,26 @@ class DisplayJsonFood{
         $message = "message";
         $From=$_SESSION['From'];
         $To=$_SESSION['To'];
-       // echo $From." ".$To;
+        // echo $From." ".$To;
         try{
             $sqlQuery = "SELECT * FROM maindata Flown_Date WHERE Flown_Date >= '$From' AND Flown_Date<='$To' ORDER BY Flown_Date ASC";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
-           /* foreach($result as $data)
-            {
-                array_push($jsonFood,
-                    array(
-                        'id'=>$data['input_id'],
-                        'Flown_Date'=>explode(" ", $data['Flown_Date'])[0],
-                        'Flown_Time'=>explode(" ", $data['Flown_Date'])[1],
-                        'Pnr'=>$data['Pnr'],
-                        'Name'=>$data['Name'],
-                        'Cell_No'=>$data['Cell_No'],
-                        'Airlines'=>$data['Airlines'],
-                        'Route'=>$data['Route']
-                    ));
-            }*/
+            /* foreach($result as $data)
+             {
+                 array_push($jsonFood,
+                     array(
+                         'id'=>$data['input_id'],
+                         'Flown_Date'=>explode(" ", $data['Flown_Date'])[0],
+                         'Flown_Time'=>explode(" ", $data['Flown_Date'])[1],
+                         'Pnr'=>$data['Pnr'],
+                         'Name'=>$data['Name'],
+                         'Cell_No'=>$data['Cell_No'],
+                         'Airlines'=>$data['Airlines'],
+                         'Route'=>$data['Route']
+                     ));
+             }*/
         }catch (PDOException $e){
             echo "Error while displaying json : " . $e->getMessage();
         }
@@ -43,33 +43,33 @@ class DisplayJsonFood{
             {
                 echo "<tr>";
 
-                    echo "<td>";
-                        echo explode(" ", $data['Flown_Date'])[0];
-                    echo "</td>";
+                echo "<td>";
+                echo explode(" ", $data['Flown_Date'])[0];
+                echo "</td>";
 
-                    echo "<td>";
-                        echo explode(" ", $data['Flown_Date'])[1];
-                    echo "</td>";
+                echo "<td>";
+                echo explode(" ", $data['Flown_Date'])[1];
+                echo "</td>";
 
-                    echo "<td>";
-                        echo $data['Pnr'];
-                    echo "</td>";
+                echo "<td>";
+                echo $data['Pnr'];
+                echo "</td>";
 
-                    echo "<td>";
-                        echo $data['Name'];
-                    echo "</td>";
+                echo "<td>";
+                echo $data['Name'];
+                echo "</td>";
 
-                    echo "<td>";
-                        echo  $data['Cell_No'];
-                    echo "</td>";
+                echo "<td>";
+                echo  $data['Cell_No'];
+                echo "</td>";
 
-                    echo "<td>";
-                        echo $data['Airlines'];
-                    echo "</td>";
+                echo "<td>";
+                echo $data['Airlines'];
+                echo "</td>";
 
-                    echo "<td>";
-                        echo $data['Route'];
-                    echo "</td>";
+                echo "<td>";
+                echo $data['Route'];
+                echo "</td>";
 
                 echo "</tr>";
             }

@@ -13,12 +13,12 @@ class InsertDetails{
         $response = array();
         $Name   = $_POST['Name'];
         $Cell_No   = $_POST['Cell_No'];
-         //getting user email via login session just to tract who is inserting data or updating data
+        //getting user email via login session just to tract who is inserting data or updating data
         $Entry_By  =  $_SESSION['id'];
         $Point  = $_POST['Point'];
         $Comission  = $_POST['Comission'];
-         try{
-             //echo $Name." ".$Cell_No." ".$Point." ".$Comission;
+        try{
+            //echo $Name." ".$Cell_No." ".$Point." ".$Comission;
             //echo !empty($Name)." ".!empty($Cell_No)." ".isset($Point)." ".isset($Comission);
             if(!empty($Name) && !empty($Cell_No) && isset($Point)&& isset($Comission)){
 

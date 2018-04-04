@@ -108,25 +108,25 @@
         document.getElementById("flownDateTo").value=today;
         //load();
     };
-        function load()
-        {
+    function load()
+    {
 
-            var From=document.getElementById("flownDateFrom").value;
-            var To=document.getElementById("flownDateTo").value;
-            // alert(From+" "+To);
-                $.ajax({
-                type: 'POST',
-                url: 'Update_Table_Session_Data.php',
-                data: {
+        var From=document.getElementById("flownDateFrom").value;
+        var To=document.getElementById("flownDateTo").value;
+        // alert(From+" "+To);
+        $.ajax({
+            type: 'POST',
+            url: 'Update_Table_Session_Data.php',
+            data: {
                 From: From,
                 To: To
-                },
-                success: function(response) {
-                    //window.open("../pages/Airlines.php","_self");
-                }
-                });
+            },
+            success: function(response) {
+                //window.open("../pages/Airlines.php","_self");
+            }
+        });
 
-        }
+    }
 
 </script>
 

@@ -8,49 +8,49 @@
 ?>
 
 <body>
-  <div id="wrapper">
-<?php
+<div id="wrapper">
+    <?php
 
     include '../pages/templates/headermenu.html';
     include '../pages/templates/sidemenu.html';
     include '../pages/templates/footer.html';
-?>
+    ?>
 
-<div id="page-wrapper">
+    <div id="page-wrapper">
 
-  <?php
+        <?php
 
-  if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
-      // true then header redirect it to the home page directly
-  {
-      echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
-      exit();
-      /* Redirect browser */
+        if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
+            // true then header redirect it to the home page directly
+        {
+            echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+            exit();
+            /* Redirect browser */
 
-  }
-  else
-  {
-      if($_SESSION['loggedIn']==false)
-      {
-          echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
-          exit();
-      }
-  }
+        }
+        else
+        {
+            if($_SESSION['loggedIn']==false)
+            {
+                echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+                exit();
+            }
+        }
 
-  ?>
-  <div class="col-lg-12">
-                      <h1 class="page-header">Add new member</h1>
+        ?>
+        <div class="col-lg-12">
+            <h1 class="page-header">Add new member</h1>
 
-  </div>
-    <form role="form" method="post"  action="../Apis/insert_contacts.php">
-      <div class="col-lg-12" >
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Member Info
-            </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-11">
+        </div>
+        <form role="form" method="post"  action="../Apis/insert_contacts.php">
+            <div class="col-lg-12" >
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Member Info
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-11">
                                 <div class="col-xs-4">
                                     <label>Name</label>
                                     <input id="name" name="Name" class="form-control">
@@ -69,20 +69,20 @@
                                     <span class="input-group-addon">%</span>
                                 </div>
 
-                          </div>
-                        <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.row (nested) -->
+                    <!-- /.panel-body -->
                 </div>
-            <!-- /.panel-body -->
-        </div>
 
-        <button type="submit" name="insert_contacts_data" value="insert_contacts_data" class="btn btn-default btn-primary">SUBMIT</button>
-        <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
-      </div>
-    </form>
+                <button type="submit" name="insert_contacts_data" value="insert_contacts_data" class="btn btn-default btn-primary">SUBMIT</button>
+                <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
+            </div>
+        </form>
 
-</div
+    </div
 </div>
 
 

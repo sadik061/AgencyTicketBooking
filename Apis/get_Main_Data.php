@@ -24,7 +24,7 @@ class DisplayJsonFood{
                         'input_id'=>$data['input_id'],
                         'Name'=>$data['Name'],
                         'Cell_No'=>$data['Cell_No'],
-			            'Fare'=>$data['Fare'],
+                        'Fare'=>$data['Fare'],
                         'Paid'=>$data['Paid'],
                         'Due'=>$data['Due'],
                         'Commission'=>$data['Commission'],
@@ -36,7 +36,7 @@ class DisplayJsonFood{
                         'Pnr'=>$data['Pnr'],
                         'Pax'=>$data['Pax'],
                         'Route'=>$data['Route'],
-			            'Airlines'=>$data['Airlines']
+                        'Airlines'=>$data['Airlines']
                     ));
             }
         }catch (PDOException $e){

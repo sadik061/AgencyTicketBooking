@@ -22,7 +22,7 @@ class InsertDetails{
             //echo !empty($Name)." ".!empty($Cell_No)." ".isset($Point)." ".isset($Comission);
             if(!empty($Amount) && !empty($Airlines)&& !empty($PaymentBy)&& !empty($MCDNo)&& !empty($Date) ){
 
-                $sqlInsert = "INSERT INTO Capping (id, Amount, Airlines, PaymentBy, MCDNo, Date) VALUES (0, '$Amount', '$Airlines', '$PaymentBy', '$MCDNo', '$Date')";
+                $sqlInsert = "INSERT INTO capping (id, Amount, Airlines, PaymentBy, MCDNo, Date) VALUES (0, '$Amount', '$Airlines', '$PaymentBy', '$MCDNo', '$Date')";
                 $conn->exec($sqlInsert);
             }
 

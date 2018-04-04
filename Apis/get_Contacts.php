@@ -12,7 +12,7 @@ class DisplayJsonFood{
         $status="status";
         $message = "message";
         $name=$_POST['Name'];
-       // echo '<script type="text/javascript">alert("Reached");</script>';
+        // echo '<script type="text/javascript">alert("Reached");</script>';
         try{
             $sqlQuery = "SELECT * FROM contacts WHERE NAME LIKE '$name%'";
             $getJson = $conn->prepare($sqlQuery);

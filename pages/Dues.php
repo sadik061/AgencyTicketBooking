@@ -138,7 +138,7 @@
                 alert(status);
             },
             success: function(response) {
-               // alert(response);
+                // alert(response);
                 alert("Successfully Updated Paid Due Amount")
                 window.open("../pages/Dues.php","_self");
             }

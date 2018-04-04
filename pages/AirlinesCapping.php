@@ -8,48 +8,48 @@
 ?>
 
 <body>
-  <div id="wrapper">
-<?php
+<div id="wrapper">
+    <?php
 
     include '../pages/templates/headermenu.html';
     include '../pages/templates/sidemenu.html';
     include '../pages/templates/footer.html';
-?>
+    ?>
 
-<div id="page-wrapper">
-  <?php
+    <div id="page-wrapper">
+        <?php
 
-  if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
-    // true then header redirect it to the home page directly
-  {
-          echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
-          exit();
-    /* Redirect browser */
+        if(!isset($_SESSION['loggedIn']))   // Checking whether the session is already there or not if
+            // true then header redirect it to the home page directly
+        {
+            echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+            exit();
+            /* Redirect browser */
 
-  }
-  else
-  {
-      if($_SESSION['loggedIn']==false)
-      {
-          echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
-          exit();
-      }
-  }
+        }
+        else
+        {
+            if($_SESSION['loggedIn']==false)
+            {
+                echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+                exit();
+            }
+        }
 
-  ?>
-  <div class="col-lg-12">
-                      <h1 class="page-header">Airlines Capping By Date</h1>
+        ?>
+        <div class="col-lg-12">
+            <h1 class="page-header">Airlines Capping By Date</h1>
 
-  </div>
-    <form role="form" method="post"  action="../Apis/insert_Capping.php">
-      <div class="col-lg-12" >
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Capping Info
-            </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-11">
+        </div>
+        <form role="form" method="post"  action="../Apis/insert_Capping.php">
+            <div class="col-lg-12" >
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Capping Info
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-11">
 
                                 <div class="col-xs-3">
                                     <label>Amount</label>
@@ -72,41 +72,41 @@
                                     <input id="Date" name="Date" class="datepicker">
                                 </div>
 
-                          </div>
-                        <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
                     </div>
-                    <!-- /.row (nested) -->
+                    <!-- /.panel-body -->
                 </div>
-            <!-- /.panel-body -->
-        </div>
 
-        <button type="submit" name="insert_capping_data" value="insert_capping_data" class="btn btn-default btn-primary">SUBMIT</button>
-        <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
-      </div>
-    </form>
+                <button type="submit" name="insert_capping_data" value="insert_capping_data" class="btn btn-default btn-primary">SUBMIT</button>
+                <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
+            </div>
+        </form>
 
 
 
 
-<!-- Tables-->
+        <!-- Tables-->
 
 
 
 
 
 
-<!--end of table -->
+        <!--end of table -->
 
 
-<script type="text/javascript">
-    function reset() {
-       var allInputFields=document.getElementsByTagName("input");
-       for (var i = 1; i < allInputFields.length; i++) {
-           allInputFields[i].value="";
-       }
+        <script type="text/javascript">
+            function reset() {
+                var allInputFields=document.getElementsByTagName("input");
+                for (var i = 1; i < allInputFields.length; i++) {
+                    allInputFields[i].value="";
+                }
 
-   }
-</script>
+            }
+        </script>
 
 
 

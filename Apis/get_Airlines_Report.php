@@ -26,11 +26,12 @@ class DisplayJsonFood{
         }
         if($sqlQuery){
             //defining first table number
-            $i=1;
+            $i=0;
+            $iid=-1;
             foreach($result as $data)
             {
-                //if first table id matched it means new data new table need to made
-                if($i==$data['id'])
+
+                if($iid != $data['id'])
                 {
                     echo '</tbody></table>';
                     //per row number default 1 for every table define it to 1
@@ -62,32 +63,33 @@ class DisplayJsonFood{
                     echo '<th>Paid</th>';
                     echo '<th>Due</th>';
                     echo '</tr></thead><tbody>';
+                    $iid=$data['id'];
                     $i++;
                 }
                 echo "<tr>";
 
                 echo "<td>";
-                    echo "$j";
+                echo "$j";
                 echo "</td>";
 
                 echo "<td>";
-                    echo $data['Pnr'];
+                echo $data['Pnr'];
                 echo "</td>";
 
                 echo "<td>";
-                    echo $data['Route'];
+                echo $data['Route'];
                 echo "</td>";
 
                 echo "<td>";
-                    echo $data['Flown_Date'];
+                echo $data['Flown_Date'];
                 echo "</td>";
 
                 echo "<td>";
-                    echo  $data['Paid'];
+                echo  $data['Paid'];
                 echo "</td>";
 
                 echo "<td>";
-                    echo $data['Due'];
+                echo $data['Due'];
                 echo "</td>";
 
                 echo "</tr>";

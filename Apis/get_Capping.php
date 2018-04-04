@@ -21,15 +21,15 @@ class DisplayJsonFood{
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
-             foreach($result as $data)
-             {
-                 array_push($jsonFood,
-                     array(
+            foreach($result as $data)
+            {
+                array_push($jsonFood,
+                    array(
 
-                         'Amount'=>$data['Amount']
+                        'Amount'=>$data['Amount']
 
-                     ));
-             }
+                    ));
+            }
         }catch (PDOException $e){
             echo "Error while displaying json : " . $e->getMessage();
         }
