@@ -14,7 +14,7 @@ class DisplayJsonFood{
         $name=$_POST['Name'];
         // echo '<script type="text/javascript">alert("Reached");</script>';
         try{
-            $sqlQuery = "SELECT * FROM contacts WHERE NAME LIKE '$name%'";
+            $sqlQuery = "SELECT * FROM agent WHERE agent_Name LIKE '$name%'";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -22,12 +22,11 @@ class DisplayJsonFood{
             {
                 array_push($jsonFood,
                     array(
-                        'id'=>$data['id'],
-                        'Name'=>$data['Name'],
-                        'Cell_No'=>$data['Cell_No'],
-                        'Point'=>$data['Point'],
-                        'Comission'=>$data['Comission'],
-                        'Entry_By'=>$data['Entry_By']
+                        'id'=>$data['agent_id'],
+                        'Name'=>$data['agent_Name'],
+                        'PhoneNo'=>$data['agent_PhoneNo'],
+                        'Entry_By'=>$data['agent_Entry_By'],
+                        'Input_Time'=>$data['agent_Input_Time']
                     ));
             }
         }catch (PDOException $e){

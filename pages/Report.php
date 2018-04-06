@@ -151,10 +151,10 @@
                                 alert("error:"+status);
                             },
                             success: function(response) {
-                                // alert(response);
+                               // alert(response);
                                 var obj = JSON.parse(response);
                                 var datas=obj.capping_data;
-
+                                //alert(datas);
                                 var total_capping=0;
                                 // alert(total_capping);
                                 for (var key in datas) {

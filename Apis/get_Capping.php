@@ -15,9 +15,9 @@ class DisplayJsonFood{
         $message = "message";
         $From=$_POST['From'];
         $To=$_POST['To'];
-        // echo $From." ".$To;
+         //echo $From." ".$To;
         try{
-            $sqlQuery = "SELECT Amount FROM capping WHERE Date BETWEEN '$From' AND '$To' ORDER BY Date ASC";
+            $sqlQuery = "SELECT capping_Amount FROM capping WHERE capping_Date >='$From' AND capping_Date<='$To' ORDER BY capping_Date ASC";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +26,7 @@ class DisplayJsonFood{
                 array_push($jsonFood,
                     array(
 
-                        'Amount'=>$data['Amount']
+                        'Amount'=>$data['capping_Amount']
 
                     ));
             }

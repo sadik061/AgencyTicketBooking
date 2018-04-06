@@ -17,7 +17,7 @@ class DisplayJsonFood{
         $To=$_SESSION['To'];
         // echo $From." ".$To;
         try{
-            $sqlQuery = "SELECT * FROM maindata Flown_Date WHERE Due > 0 AND Flown_Date >= '$From' AND Flown_Date<='$To' ORDER BY Flown_Date ASC";
+            $sqlQuery = "SELECT * FROM maindata,airlines  WHERE maindata_Airlines=airlines_id AND maindata_Due > 0 AND maindata_Flown_Date >= '$From' AND maindata_Flown_Date<='$To' ORDER BY maindata_Flown_Date ASC";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -44,41 +44,41 @@ class DisplayJsonFood{
                 echo "<tr>";
 
                 echo "<td>";
-                echo explode(" ", $data['Flown_Date'])[0];
+                echo explode(" ", $data['maindata_Flown_Date'])[0];
                 echo "</td>";
 
                 echo "<td>";
-                echo explode(" ", $data['Flown_Date'])[1];
+                echo explode(" ", $data['maindata_Flown_Date'])[1];
                 echo "</td>";
 
                 echo "<td>";
-                echo $data['Pnr'];
+                echo $data['maindata_Pnr'];
                 echo "</td>";
 
                 echo "<td>";
-                echo $data['Name'];
+                echo $data['maindata_Name'];
                 echo "</td>";
 
                 echo "<td>";
-                echo  $data['Cell_No'];
+                echo  $data['maindata_PhoneNo'];
                 echo "</td>";
 
                 echo "<td>";
-                echo $data['Airlines'];
+                echo $data['airlines_Name'];
                 echo "</td>";
 
                 echo "<td>";
-                echo $data['Route'];
+                echo $data['maindata_Route'];
                 echo "</td>";
 
                 echo "<td contenteditable='true'>";
-                echo $data['Paid'];
+                echo $data['maindata_Paid'];
                 echo "</td>";
 
                 echo "<td contenteditable='true'>";
-                echo $data['Due'];
+                echo $data['maindata_Due'];
                 echo "</td>";
-                $id= $data['input_id'];
+                $id= $data['maindata_id'];
                 echo "<td>";
                 echo "<button type=\"button\" id=\"edit\" class=\"btn btn-outline btn-primary\" onclick=\"updateRow(this,'$id')\">Update</button>";
                 echo "</td>";

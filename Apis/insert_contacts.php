@@ -14,15 +14,18 @@ class InsertDetails{
         $Name   = $_POST['Name'];
         $Cell_No   = $_POST['Cell_No'];
         //getting user email via login session just to tract who is inserting data or updating data
+        //getting user email via login session just to tract who is inserting data or updating data
         $Entry_By  =  $_SESSION['id'];
-        $Point  = $_POST['Point'];
-        $Comission  = $_POST['Comission'];
-        try{
-            //echo $Name." ".$Cell_No." ".$Point." ".$Comission;
-            //echo !empty($Name)." ".!empty($Cell_No)." ".isset($Point)." ".isset($Comission);
-            if(!empty($Name) && !empty($Cell_No) && isset($Point)&& isset($Comission)){
+        date_default_timezone_set('Asia/Dhaka');
 
-                $sqlInsert = "INSERT INTO contacts (id, Name, Cell_No, Point, Comission, Entry_By) VALUES (0, '$Name', '$Cell_No', '$Point', '$Comission', '$Entry_By')";
+        // Then call the date functions
+        $input_Time = date('Y-m-d H:i:s');
+        try{
+           // echo $input_Time;
+            //echo !empty($Name)." ".!empty($Cell_No)." ".isset($Point)." ".isset($Comission);
+            if(!empty($Name) && !empty($Cell_No)){
+
+                $sqlInsert = "INSERT INTO agent (agent_id, agent_Name, agent_PhoneNo, agent_Entry_By, agent_Input_Time) VALUES (0, '$Name', '$Cell_No', $Entry_By, '$input_Time')";
                 $conn->exec($sqlInsert);
             }
 

@@ -18,7 +18,7 @@ class InsertDetails{
         echo $id." ".$Paid." ".$Due;
         try{
             if( isset($Due)&&isset($Paid) && isset($id)){
-                $sqlInsert = "UPDATE maindata SET Paid='$Paid', Due='$Due' WHERE input_id='$id'";
+                $sqlInsert = "UPDATE maindata SET maindata_Paid='$Paid', maindata_Due='$Due' WHERE maindata_id='$id'";
                 $conn->exec($sqlInsert);
 
             }

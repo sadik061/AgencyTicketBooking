@@ -55,10 +55,6 @@
                                     <label>Name</label>
                                     <input id="name" name="Name" class="form-control">
                                 </div>
-                                <div class="col-xs-3">
-                                    <label>Cell No.</label>
-                                    <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
-                                </div>
 
                             </div>
                             <!-- /.col-lg-6 (nested) -->

@@ -56,17 +56,8 @@
                                     <input id="name" name="Name" class="form-control">
                                 </div>
                                 <div class="col-xs-3">
-                                    <label>Cell No.</label>
+                                    <label>Phone No.</label>
                                     <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
-                                </div>
-                                <div class="col-xs-2">
-                                    <label>Point</label>
-                                    <input id="Point" name="Point" class="form-control" placeholder="Enter text">
-                                </div>
-                                <div class="form-group input-group" style="margin-top: 24px;">
-                                    <span class="input-group-addon" style="padding: 6px 34px;">Commission</span>
-                                    <input id="Comission" name="Comission"  class="form-control">
-                                    <span class="input-group-addon">%</span>
                                 </div>
 
                             </div>

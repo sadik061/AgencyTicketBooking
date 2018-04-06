@@ -21,22 +21,22 @@ class DisplayJsonFood{
             {
                 array_push($jsonFood,
                     array(
-                        'input_id'=>$data['input_id'],
-                        'Name'=>$data['Name'],
-                        'Cell_No'=>$data['Cell_No'],
-                        'Fare'=>$data['Fare'],
-                        'Paid'=>$data['Paid'],
-                        'Due'=>$data['Due'],
-                        'Commission'=>$data['Commission'],
-                        'Ticket_By'=>$data['Ticket_By'],
-                        'Comment'=>$data['Comment'],
-                        'Point'=>$data['Point'],
-                        'Date'=>$data['Date'],
-                        'Flown_Date'=>$data['Flown_Date'],
-                        'Pnr'=>$data['Pnr'],
-                        'Pax'=>$data['Pax'],
-                        'Route'=>$data['Route'],
-                        'Airlines'=>$data['Airlines']
+                        'input_id'=>$data['maindata_id'],
+                        'Name'=>$data['maindata_Name'],
+                        'Cell_No'=>$data['maindata_PhoneNo'],
+                        'Fare'=>$data['maindata_Fare'],
+                        'Paid'=>$data['maindata_Paid'],
+                        'Due'=>$data['maindata_Due'],
+                        'Commission'=>$data['maindata_Commission'],
+                        'Ticket_By'=>$data['maindata_Ticket_By'],
+                        'Comment'=>$data['maindata_Comment'],
+                        'Point'=>$data['maindata_Point'],
+                        'Date'=>$data['maindata_Date'],
+                        'Flown_Date'=>$data['maindata_Flown_Date'],
+                        'Pnr'=>$data['maindata_Pnr'],
+                        'Pax'=>$data['maindata_Pax'],
+                        'Route'=>$data['maindata_Route'],
+                        'Airlines'=>$data['maindata_Airlines']
                     ));
             }
         }catch (PDOException $e){

@@ -176,8 +176,6 @@
                                         </datalist>
                                     </div>
 
-
-
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
@@ -188,7 +186,7 @@
 
                 </div>
 
-                <button type="submit" name="insert_main_data" value="insert_main_data" onclick="update_Contact_Point()" class="btn btn-default btn-primary">SUBMIT</button>
+                <button type="submit" name="insert_main_data" value="insert_main_data"  class="btn btn-default btn-primary">SUBMIT</button>
                 <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
 
             </div>
@@ -200,7 +198,7 @@
 
 <script type="text/javascript">
     var contact_id=undefined;
-    var contact_point=undefined;
+
     $(document).ready(function() {
         //for suggesting real time ticket by contacts name
         $('#ticketBy').on('input', function() {
@@ -226,15 +224,15 @@
                     var datas=obj.contacts_data;
 
                     var options = '';
-                    var comission=0;
+
                     for (var key in datas) {
                         if (datas.hasOwnProperty(key)) {
                             options += '<option value="'+datas[key].Name+'" data-id="'+datas[key].id+'"/>';
-                            comission=datas[key].Comission;
                             //alert(key + " -> " + datas[key].Name);
                         }
                     }
                     document.getElementById('suggestions').innerHTML = options;
+
                     //getting the selected suggetions and searching the comission value for the name and saving in the comission field
                     $("input[name=Ticket_By]").focusout(function(){
                         for (var key in datas) {
@@ -242,8 +240,7 @@
                                 if(datas[key].Name==$(this).val())
                                 {
                                     contact_id=datas[key].id;
-
-                                    document.getElementById('commision').value = datas[key].Comission;
+                                    document.getElementById('ticketBy').value = contact_id;
                                     break;
                                 }
                             }
@@ -317,6 +314,20 @@
                         }
                     }
                     document.getElementById('AirlineSuggestions').innerHTML = options;
+
+                    //getting the selected suggetions and searching the comission value for the name and saving in the comission field
+                    $("input[name=Airlines]").focusout(function(){
+                        for (var key in datas) {
+                            if (datas.hasOwnProperty(key)) {
+                                if(datas[key].Name==$(this).val())
+                                {
+                                    contact_id=datas[key].id;
+                                    document.getElementById('airline').value = contact_id;
+                                    break;
+                                }
+                            }
+                        }
+                    });
                 }
 
 
@@ -341,24 +352,7 @@
 
 
 
-    function update_Contact_Point() {
-        contact_point= document.getElementById('point').value;
-        $.ajax({
-            type: 'POST',
-            url: '../Apis/Update_Contact_Point.php',
-            async:false,
-            data: {
-                id: contact_id,
-                Point: contact_point,
-            },
-            error: function (xhr, status) {
-                alert(status);
-            },
-            success: function(data) {
-                //alert(data);
-            }
-        });
-    }
+
 
 </script>
 

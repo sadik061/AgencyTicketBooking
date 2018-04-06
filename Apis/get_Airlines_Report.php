@@ -17,7 +17,7 @@ class DisplayJsonFood{
         $To=$_SESSION['To'];
         // echo $From." ".$To;
         try{
-            $sqlQuery = "SELECT * FROM airlines,maindata WHERE airlines.Name=maindata.Airlines AND Flown_Date BETWEEN '$From' and '$To'";
+            $sqlQuery = "SELECT * FROM airlines,maindata WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date >= '$From' and maindata_Flown_Date <='$To'";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -31,7 +31,7 @@ class DisplayJsonFood{
             foreach($result as $data)
             {
 
-                if($iid != $data['id'])
+                if($iid != $data['airlines_id'])
                 {
                     echo '</tbody></table>';
                     //per row number default 1 for every table define it to 1
@@ -40,7 +40,7 @@ class DisplayJsonFood{
                     echo '<table class="table table-striped table-bordered table-hover">';
 
                     echo '<div>';
-                    echo $data['Airlines'];
+                    echo $data['airlines_Name'];
                     echo '</div>';
 
                     echo '<div>';
@@ -63,7 +63,7 @@ class DisplayJsonFood{
                     echo '<th>Paid</th>';
                     echo '<th>Due</th>';
                     echo '</tr></thead><tbody>';
-                    $iid=$data['id'];
+                    $iid=$data['airlines_id'];
                     $i++;
                 }
                 echo "<tr>";
@@ -73,23 +73,23 @@ class DisplayJsonFood{
                 echo "</td>";
 
                 echo "<td>";
-                echo $data['Pnr'];
+                echo $data['maindata_Pnr'];
                 echo "</td>";
 
                 echo "<td>";
-                echo $data['Route'];
+                echo $data['maindata_Route'];
                 echo "</td>";
 
                 echo "<td>";
-                echo $data['Flown_Date'];
+                echo $data['maindata_Flown_Date'];
                 echo "</td>";
 
                 echo "<td>";
-                echo  $data['Paid'];
+                echo  $data['maindata_Paid'];
                 echo "</td>";
 
                 echo "<td>";
-                echo $data['Due'];
+                echo $data['maindata_Due'];
                 echo "</td>";
 
                 echo "</tr>";

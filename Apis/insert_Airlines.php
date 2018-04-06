@@ -12,13 +12,18 @@ class InsertDetails{
         //array for json response
         $response = array();
         $Name   = $_POST['Name'];
-        $Cell_No   = $_POST['Cell_No'];
-        try{
-            echo $Name." ".$Cell_No;
-            //echo !empty($Name)." ".!empty($Cell_No)." ".isset($Point)." ".isset($Comission);
-            if(!empty($Name) && !empty($Cell_No)){
+        //getting user email via login session just to tract who is inserting data or updating data
+        $Entry_By  =  $_SESSION['id'];
+        date_default_timezone_set('Asia/Dhaka');
 
-                $sqlInsert = "INSERT INTO airlines (id, Name, ContactNo) VALUES (0, '$Name', '$Cell_No')";
+        // Then call the date functions
+        $input_Time = date('Y-m-d H:i:s');
+        try{
+            //echo $Name." ".$Entry_By." ".$input_Time;
+            //echo !empty($Name)." ".!empty($Cell_No)." ".isset($Point)." ".isset($Comission);
+            if(!empty($Name) ){
+
+                $sqlInsert = "INSERT INTO airlines (airlines_id, airlines_Name, airlines_Entry_By, airlines_Input_Time) VALUES (0, '$Name', '$Entry_By', '$input_Time')";
                 $conn->exec($sqlInsert);
             }
 

@@ -16,7 +16,7 @@ class InsertDetails{
 
             if(!empty($Pnr) )
             {
-                $sqlQuery = "SELECT * FROM maindata WHERE Pnr='$Pnr'";
+                $sqlQuery = "SELECT * FROM maindata WHERE maindata_Pnr='$Pnr'";
                 $getJson = $conn->prepare($sqlQuery);
                 $getJson->execute();
                 $result = $getJson->fetchAll(PDO::FETCH_ASSOC);

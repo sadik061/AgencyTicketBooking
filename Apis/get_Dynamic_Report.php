@@ -15,12 +15,12 @@ class DisplayJsonFood{
         $EndDate=$_POST['To'];
         // echo '<script type="text/javascript">alert("Reached");</script>';
         try{
-            $sqlQuery = "SELECT Date,SUM(Fare) as Total_Fare,SUM(Paid) as Total_Paid,
-SUM(Due) as Total_Due,COUNT(Date) as Total_Sell 
+            $sqlQuery = "SELECT maindata_Date,SUM(maindata_Fare) as Total_Fare,SUM(maindata_Paid) as Total_Paid,
+SUM(maindata_Due) as Total_Due,COUNT(maindata_Date) as Total_Sell 
 FROM 
 maindata 
-WHERE Date BETWEEN '$StartDate' AND '$EndDate' 
-GROUP BY Date";
+WHERE maindata_Date >= '$StartDate' AND maindata_Date <= '$EndDate' 
+GROUP BY maindata_Date";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -28,7 +28,7 @@ GROUP BY Date";
             {
                 array_push($jsonFood,
                     array(
-                        'Date'=>$data['Date'],
+                        'Date'=>$data['maindata_Date'],
                         'Total_Fare'=>$data['Total_Fare'],
                         'Total_Paid'=>$data['Total_Paid'],
                         'Total_Due'=>$data['Total_Due'],

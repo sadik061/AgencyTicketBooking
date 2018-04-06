@@ -14,7 +14,7 @@ class DisplayJsonFood{
         $name=$_POST['Name'];
         // echo '<script type="text/javascript">alert("Reached");</script>';
         try{
-            $sqlQuery = "SELECT * FROM airlines WHERE NAME LIKE '$name%'";
+            $sqlQuery = "SELECT * FROM airlines WHERE airlines_NAME LIKE '$name%'";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -22,9 +22,10 @@ class DisplayJsonFood{
             {
                 array_push($jsonFood,
                     array(
-                        'id'=>$data['id'],
-                        'Name'=>$data['Name'],
-                        'ContactNo'=>$data['ContactNo']
+                        'id'=>$data['airlines_id'],
+                        'Name'=>$data['airlines_Name'],
+                        'Entry_By'=>$data['airlines_Entry_By'],
+                        'Input_Time'=>$data['airlines_Input_Time']
                     ));
             }
         }catch (PDOException $e){

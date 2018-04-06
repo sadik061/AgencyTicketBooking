@@ -18,17 +18,17 @@ class InsertDetails{
 
             if(!empty($Email) && !empty($Password))
             {
-                $sqlQuery = "SELECT * FROM user WHERE Email='$Email' AND Password='$Password'";
+                $sqlQuery = "SELECT * FROM user WHERE user_Email='$Email' AND user_Password='$Password'";
                 $getJson = $conn->prepare($sqlQuery);
                 $getJson->execute();
                 $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
                 if(count($result) > 0) {
                     foreach($result as $data)
                     {
-                        $_SESSION['id']=$data['id'];
-                        $_SESSION['Name']=$data['Name'];
-                        $_SESSION['PhoneNo']=$data['PhoneNo'];
-                        $_SESSION['Email']=$data['Email'];
+                        $_SESSION['id']=$data['user_id'];
+                        $_SESSION['Name']=$data['user_Name'];
+                        $_SESSION['PhoneNo']=$data['user_PhoneNo'];
+                        $_SESSION['Email']=$data['user_Email'];
                     }
                     $_SESSION['loggedIn']=true;
 

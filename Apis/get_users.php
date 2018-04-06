@@ -20,10 +20,10 @@ class DisplayJsonFood{
             {
                 array_push($jsonFood,
                     array(
-                        'id'=>$data['id'],
-                        'Name'=>$data['Name'],
-                        'PhoneNo'=>$data['PhoneNo'],
-                        'Email'=>$data['Email']
+                        'id'=>$data['user_id'],
+                        'Name'=>$data['user_Name'],
+                        'PhoneNo'=>$data['user_PhoneNo'],
+                        'Email'=>$data['user_Email']
                     ));
             }
         }catch (PDOException $e){
