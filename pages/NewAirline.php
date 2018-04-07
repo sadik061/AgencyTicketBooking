@@ -55,6 +55,10 @@
                                     <label>Name</label>
                                     <input id="name" name="Name" class="form-control">
                                 </div>
+                                <div class="col-xs-4">
+                                    <label>Point</label>
+                                    <input id="point" name="point" class="form-control">
+                                </div>
 
                             </div>
                             <!-- /.col-lg-6 (nested) -->
@@ -72,7 +76,11 @@
     </div
 </div>
 
-
+<script>
+    window.onload = function(e) {
+        document.getElementById("point").value=0;
+    };
+</script>
 
 </body>
 </html>

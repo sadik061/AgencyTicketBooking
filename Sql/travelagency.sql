@@ -15,6 +15,7 @@ CREATE TABLE `user` (
 CREATE TABLE `airlines` (
   `airlines_id` int(11) NOT NULL AUTO_INCREMENT,
   `airlines_Name` varchar(255) DEFAULT NULL,
+  `airlines_Point` int(11) DEFAULT NULL,
   `airlines_Entry_By` int(11) NOT NULL,
   `airlines_Input_Time` datetime DEFAULT NULL,
   PRIMARY KEY (airlines_id),

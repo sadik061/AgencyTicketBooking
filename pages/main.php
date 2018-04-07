@@ -186,7 +186,7 @@
 
                 </div>
 
-                <button type="submit" name="insert_main_data" value="insert_main_data"  class="btn btn-default btn-primary">SUBMIT</button>
+                <button type="submit" name="insert_main_data" value="insert_main_data" onclick="update_airlines_Point()" class="btn btn-default btn-primary">SUBMIT</button>
                 <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
 
             </div>
@@ -200,6 +200,18 @@
     var contact_id=undefined;
 
     $(document).ready(function() {
+
+        //auto update due amount
+        $("input[name=Paid]").focusout(function(){
+
+            //alert("in update");
+            var fare= document.getElementById('fare').value;
+            var paid=document.getElementById('paid').value;
+            var due=fare-paid;
+            //alert(due);
+            document.getElementById('due').value=due;
+        });
+
         //for suggesting real time ticket by contacts name
         $('#ticketBy').on('input', function() {
 
@@ -340,6 +352,28 @@
 
 
 
+    function update_airlines_Point() {
+        var point= document.getElementById('point').value;
+        var id=document.getElementById('airline').value;
+        //alert("in update");
+        $.ajax({
+            type: 'POST',
+            url: '../Apis/Update_Airlines_Point.php',
+            async:false,
+            data: {
+                id:id,
+                Point: point,
+            },
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function(data) {
+                //when found names sending them in datalist for suggetions
+                //alert(data);
+            }
+        });
+    }
+
 
     function reset() {
         var allInputFields=document.getElementsByTagName("input");
@@ -348,11 +382,6 @@
         }
 
     }
-
-
-
-
-
 
 </script>
 
