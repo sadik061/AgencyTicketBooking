@@ -17,7 +17,11 @@ class DisplayJsonFood{
         $To=$_SESSION['To'];
         // echo $From." ".$To;
         try{
-            $sqlQuery = "SELECT * FROM airlines,maindata WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date >= '$From' and maindata_Flown_Date <='$To'";
+            $sqlQuery = "SELECT airlines_id,airlines_Name,SUM(maindata_Fare) as TotalAmount ,COUNT(maindata_id) as TotalSell,
+            (select SUM(capping_Amount) from capping WHERE capping_Date>='$From' and capping_Date <='$To')as TotalCapping,
+            (SUM(maindata_Fare)-(select SUM(capping_Amount) from capping WHERE capping_Date>='$From' and capping_Date <='$To')) as TotalDueCapping,
+            maindata_Pnr,maindata_Route,maindata_Flown_Date,maindata_Paid,maindata_Due FROM airlines,maindata,capping 
+            WHERE airlines_id=maindata_Airlines AND airlines_id=capping_Airlines AND maindata_Flown_Date >= '$From' and maindata_Flown_Date <='$To'";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -44,15 +48,19 @@ class DisplayJsonFood{
                     echo '</div>';
 
                     echo '<div>';
-                    echo 'Total Amount';
+                    echo 'Total Amount : '.$data['TotalAmount'];
                     echo '</div>';
 
                     echo '<div>';
-                    echo 'TotalSell';
+                    echo 'TotalSell : '.$data['TotalSell'];
                     echo '</div>';
 
                     echo '<div>';
-                    echo 'Total Capping';
+                    echo 'Total Capping : '.$data['TotalCapping'];
+                    echo '</div>';
+
+                    echo '<div>';
+                    echo 'Total Due Capping : '.$data['TotalDueCapping'];
                     echo '</div>';
 
                     echo '<thead><tr>';
