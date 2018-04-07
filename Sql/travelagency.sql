@@ -65,7 +65,7 @@ CREATE TABLE `maindata` (
   `maindata_Pax` int(11) DEFAULT NULL,
   `maindata_Route` varchar(255) DEFAULT NULL,
   `maindata_Airlines` int(11) NOT NULL,
-  PRIMARY KEY (maindata__id),
+  PRIMARY KEY (maindata_id),
   foreign key (maindata_Entry_By) references user(user_id),
   foreign key (maindata_Ticket_By) references agent(agent_id),
   foreign key (maindata_Airlines) references airlines(airlines_id)

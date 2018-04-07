@@ -291,8 +291,6 @@
                     }
 
                 }
-
-
             });
         });
         //getting airlines names suggetions
@@ -353,6 +351,8 @@
 
 
     function update_airlines_Point() {
+
+
         var point= document.getElementById('point').value;
         var id=document.getElementById('airline').value;
         //alert("in update");
