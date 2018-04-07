@@ -37,7 +37,10 @@ class DisplayJsonFood{
 
                 if($iid != $data['airlines_id'])
                 {
-                    echo '</tbody></table>';
+                    echo '<div class="row">';
+                    echo '<div class="col-lg-6">';
+                    echo '<div class="panel panel-default">';
+                    echo '<div class="panel-heading">';
                     //per row number default 1 for every table define it to 1
                     $j=1;
                     //for every new data defining new table
@@ -61,6 +64,12 @@ class DisplayJsonFood{
 
                     echo '<div>';
                     echo 'Total Due Capping : '.$data['TotalDueCapping'];
+                    echo '</div>';
+
+                    echo '<div>';
+                    echo 'Total Point : '.$data['TotalDueCapping'];
+                    echo '</div>';
+
                     echo '</div>';
 
                     echo '<thead><tr>';
@@ -101,6 +110,9 @@ class DisplayJsonFood{
                 echo "</td>";
 
                 echo "</tr>";
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
                 $j++;
             }
             //echo json_encode(array("user_data"=>$jsonFood,$status=>1,$message=>"Success"));
