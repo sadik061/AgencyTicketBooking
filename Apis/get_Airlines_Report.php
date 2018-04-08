@@ -17,11 +17,14 @@ class DisplayJsonFood{
         $To=$_SESSION['To'];
         // echo $From." ".$To;
         try{
-            $sqlQuery = "SELECT airlines_id,airlines_Name,SUM(maindata_Fare) as TotalAmount ,COUNT(maindata_id) as TotalSell,
-            (select SUM(capping_Amount) from capping WHERE capping_Date>='$From' and capping_Date <='$To')as TotalCapping,
-            (SUM(maindata_Fare)-(select SUM(capping_Amount) from capping WHERE capping_Date>='$From' and capping_Date <='$To')) as TotalDueCapping,
-            maindata_Pnr,maindata_Route,maindata_Flown_Date,maindata_Paid,maindata_Due FROM airlines,maindata,capping 
-            WHERE airlines_id=maindata_Airlines AND airlines_id=capping_Airlines AND maindata_Flown_Date >= '$From' and maindata_Flown_Date <='$To'";
+            $sqlQuery = "SELECT 
+ airlines_id,airlines_Name,maindata_Pnr,maindata_Route,maindata_Flown_Date,maindata_Paid,maindata_Due,
+(select SUM(maindata_Fare) from maindata WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date>='$From' and maindata_Flown_Date <='$To') as TotalAmount ,
+(select COUNT(maindata_id) FROM maindata WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date>='$From' and maindata_Flown_Date <='$To' ) as TotalSell, 
+(select SUM(capping_Amount) from capping WHERE capping_Airlines=airlines_id AND capping_Date>='$From' and capping_Date <='$To')as TotalCapping, 
+(select SUM(maindata_Due) from maindata WHERE airlines_id=maindata_Airlines GROUP BY airlines_id) as TotalDueCapping, 
+(select SUM(airlines_Point) from airlines WHERE airlines_id=maindata_Airlines GROUP BY airlines_id) as TotalPoint FROM airlines,maindata
+WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date >= '$From' and maindata_Flown_Date <='$To'";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -37,6 +40,8 @@ class DisplayJsonFood{
 
                 if($iid != $data['airlines_id'])
                 {
+
+                    echo '</tbody></table>';
                     echo '<div class="row">';
                     echo '<div class="col-lg-6">';
                     echo '<div class="panel panel-default">';
@@ -59,7 +64,8 @@ class DisplayJsonFood{
                     echo '</div>';
 
                     echo '<div>';
-                    echo 'Total Capping : '.$data['TotalCapping'];
+                    echo 'Total Capping : ';
+                    echo ($data['TotalCapping'] == null)?0:$data['TotalCapping'];
                     echo '</div>';
 
                     echo '<div>';
@@ -67,7 +73,7 @@ class DisplayJsonFood{
                     echo '</div>';
 
                     echo '<div>';
-                    echo 'Total Point : '.$data['TotalDueCapping'];
+                    echo 'Total Point : '.$data['TotalPoint'];
                     echo '</div>';
 
                     echo '</div>';
