@@ -146,9 +146,9 @@
       <div class="row" style="margin-bottom: 20px;">
           <div class="col-lg-6">
               <div class="input-group custom-search-form">
-              <input type="text" class="form-control" placeholder="Search PNR...">
+              <input type="text" id="pnr" class="form-control" placeholder="Search PNR...">
               <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button class="btn btn-default" type="button" onclick="loadPNR()">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -156,15 +156,84 @@
           </div>
           <div class="col-lg-6">
           <div class="input-group custom-search-form">
-              <input type="text" class="form-control" placeholder="Search Agent mobile number...">
+              <input type="text" id="agent" class="form-control" placeholder="Search Agent mobile number...">
               <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
+                                    <button class="btn btn-default" type="button" onclick="loadAgent()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
           </div>
           </div>
       </div>
+      <div class="col-lg-12">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  DataTables Advanced Tables
+              </div>
+              <!-- /.panel-heading -->
+              <div class="panel-body">
+                  <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+                      <thead>
+                      <tr>
+                         <th>#</th>
+                         <th>Passenger Name</th>
+                         <th>Passenger Phone</th>
+                         <th>Fare</th>
+                         <th>Paid</th>
+                         <th>Due</th>
+                          <th>Flight Time</th>
+                         <th>Pax</th>
+                          <th>Route</th>
+                          <th>Airlines</th>
+                      </tr>
+                      </thead>
+                      <tbody id="tbody">
+
+                      <script>
+                          function loadPNR() {
+                              var pnr=document.getElementById("pnr").value;
+                              $.ajax({
+                                  type: 'POST',
+                                  url: '../Apis/get_Dashboard_PNR.php',
+                                  data: {
+                                      PNR: pnr
+                                  },
+                                  success: function(response) {
+                                     // alert(response);
+                                      document.getElementById("tbody").innerHTML=response;
+                                      //window.open("../pages/Airlines.php","_self");
+                                  }
+                              });
+                          }
+                          function loadAgent() {
+                              var agent=document.getElementById("agent").value;
+                              $.ajax({
+                                  type: 'POST',
+                                  url: '../Apis/get_Dashboard_Agent.php',
+                                  data: {
+                                      Agent: agent
+                                  },
+                                  success: function(response) {
+                                      //alert(response);
+                                      document.getElementById("tbody").innerHTML=response;
+                                      //window.open("../pages/Airlines.php","_self");
+                                  }
+                              });
+                          }
+
+                      </script>
+
+                      </tbody>
+                  </table>
+                  <!-- /.table-responsive -->
+              </div>
+              <!-- /.panel-body -->
+          </div>
+          <!-- /.panel -->
+      </div>
+
+
+
       <div class="row">
 
           <div class="col-lg-12">
