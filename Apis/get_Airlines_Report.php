@@ -31,21 +31,23 @@ WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date >= '$From' and maind
         }catch (PDOException $e){
             echo "Error while displaying json : " . $e->getMessage();
         }
+        echo '<div class="row">';
         if($sqlQuery){
             //defining first table number
             $i=0;
             $iid=-1;
+            echo '<div class="col-lg-12">';
+
             foreach($result as $data)
             {
+                echo '</tbody></table>';
 
+                echo '<div class="panel panel-default">';
+                echo '<div class="panel-heading">';
                 if($iid != $data['airlines_id'])
                 {
 
-                    echo '</tbody></table>';
-                    echo '<div class="row">';
-                    echo '<div class="col-lg-6">';
-                    echo '<div class="panel panel-default">';
-                    echo '<div class="panel-heading">';
+
                     //per row number default 1 for every table define it to 1
                     $j=1;
                     //for every new data defining new table
