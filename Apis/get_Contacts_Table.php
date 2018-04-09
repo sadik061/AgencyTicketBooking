@@ -28,6 +28,7 @@ class DisplayJsonFood{
 
             echo '<table class="table table-striped table-bordered table-hover" style="margin-top: 4%;">';
             echo '<thead><tr>';
+
             echo '<th>#</th>';
             echo '<th>Name</th>';
             echo '<th>Phone No</th>';
