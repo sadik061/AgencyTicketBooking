@@ -21,10 +21,14 @@ class DisplayJsonFood{
  airlines_id,airlines_Name,maindata_Pnr,maindata_Route,maindata_Flown_Date,maindata_Paid,maindata_Due,
 (select SUM(maindata_Fare) from maindata WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date>='$From' and maindata_Flown_Date <='$To') as TotalAmount ,
 (select COUNT(maindata_id) FROM maindata WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date>='$From' and maindata_Flown_Date <='$To' ) as TotalSell, 
-(select SUM(capping_Amount) from capping WHERE capping_Airlines=airlines_id AND capping_Date>='$From' and capping_Date <='$To')as TotalCapping, 
-(select SUM(maindata_Due) from maindata WHERE airlines_id=maindata_Airlines GROUP BY airlines_id) as TotalDueCapping, 
+(select COALESCE(SUM(capping_Amount),0) from capping WHERE capping_Airlines=airlines_id AND capping_Date>='$From' and capping_Date <='$To')as TotalCapping, 
+(
+(select SUM(maindata_Fare) from maindata WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date>='$From' and maindata_Flown_Date <='$To')
+-
+(select COALESCE(SUM(capping_Amount),0) from capping WHERE capping_Airlines=airlines_id AND capping_Date>='$From' and capping_Date <='$To')
+) as TotalDueCapping, 
 (select SUM(airlines_Point) from airlines WHERE airlines_id=maindata_Airlines GROUP BY airlines_id) as TotalPoint FROM airlines,maindata
-WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date >= '$From' and maindata_Flown_Date <='$To'";
+WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date >= '$From' and maindata_Flown_Date <='$To' ORDER BY airlines_id,maindata_Flown_Date ASC";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);
@@ -41,11 +45,11 @@ WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date >= '$From' and maind
                 if($iid != $data['airlines_id'])
                 {
 
-                    echo '</tbody></table>';
+                   // echo '</tbody></table>';
                     echo '<div class="row">';
                     echo '<div class="col-lg-6">';
-                    echo '<div class="panel panel-default">';
-                    echo '<div class="panel-heading">';
+                    //echo '<div class="panel panel-default">';
+                    //echo '<div class="panel-heading">';
                     //per row number default 1 for every table define it to 1
                     $j=1;
                     //for every new data defining new table
@@ -64,8 +68,7 @@ WHERE airlines_id=maindata_Airlines AND maindata_Flown_Date >= '$From' and maind
                     echo '</div>';
 
                     echo '<div>';
-                    echo 'Total Capping : ';
-                    echo ($data['TotalCapping'] == null)?0:$data['TotalCapping'];
+                    echo 'Total Capping : '.$data['TotalCapping'];
                     echo '</div>';
 
                     echo '<div>';

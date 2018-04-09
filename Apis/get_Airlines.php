@@ -11,10 +11,10 @@ class DisplayJsonFood{
         $jsonFood = array();
         $status="status";
         $message = "message";
-        $name=$_POST['Name'];
+        //$name=$_POST['Name'];
         // echo '<script type="text/javascript">alert("Reached");</script>';
         try{
-            $sqlQuery = "SELECT * FROM airlines WHERE airlines_NAME LIKE '$name%'";
+            $sqlQuery = "SELECT * FROM airlines";
             $getJson = $conn->prepare($sqlQuery);
             $getJson->execute();
             $result = $getJson->fetchAll(PDO::FETCH_ASSOC);

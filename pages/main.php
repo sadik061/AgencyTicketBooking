@@ -104,11 +104,10 @@
 
                                 <div class="form-group">
                                     <label>Ticket By</label>
-                                    <input id="ticketBy" name="Ticket_By" list="suggestions" class="form-control">
+                                    <select name="Ticket_By" id="ticketBy" class="form-control">
+                                    </select>
+
                                 </div>
-                                <datalist id="suggestions">
-                                    <option value="Black">
-                                </datalist>
                                 <div class="form-group">
                                     <label>Comment</label>
                                     <input id="comment" name="Comment" class="form-control">
@@ -170,10 +169,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Airlines</label>
-                                        <input id="airline" name="Airlines" list="AirlineSuggestions"  class="form-control">
-                                        <datalist id="AirlineSuggestions">
-                                            <option value="Black">
-                                        </datalist>
+                                        <select name="Airlines" id="airline" class="form-control">
+                                        </select>
                                     </div>
 
                                 </div>
@@ -201,6 +198,63 @@
 
     $(document).ready(function() {
 
+        var ticket_by = document.getElementById("ticketBy");
+        var airlines = document.getElementById("airline");
+        //getting agents
+        $.ajax({
+            type: 'POST',
+            url: '../Apis/get_Contacts.php',
+            async:false,
+            data: {
+            },
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function(data) {
+                //when found names sending them in datalist for suggetions
+
+                var obj = JSON.parse(data);
+
+                var datas=obj.contacts_data;
+                for (var key in datas) {
+                    if (datas.hasOwnProperty(key)) {
+                        var option = document.createElement("option");
+                        option.text = datas[key].Name;
+                        option.value=datas[key].id;
+                        ticket_by.add(option);
+                    }
+                }
+            }
+        });
+        //getting airlines
+        $.ajax({
+            type: 'POST',
+            url: '../Apis/get_Airlines.php',
+            async:false,
+            data: {
+            },
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function(data) {
+                //when found names sending them in datalist for suggetions
+
+                var obj = JSON.parse(data);
+
+                var datas=obj.airlines_data;
+
+                var options = '';
+                for (var key in datas) {
+                    if (datas.hasOwnProperty(key)) {
+                        var option = document.createElement("option");
+                        option.text = datas[key].Name;
+                        option.value=datas[key].id;
+                        airlines.add(option);
+                    }
+                }
+            }
+        });
+
         //auto update due amount
         $("input[name=Paid]").focusout(function(){
 
@@ -212,58 +266,6 @@
             document.getElementById('due').value=due;
         });
 
-        //for suggesting real time ticket by contacts name
-        $('#ticketBy').on('input', function() {
-
-            var textValueOfInput = $(this).val();
-            //alert(textValueOfInput);
-            //requesting to get all contacts with the starting name in the input field
-            $.ajax({
-                type: 'POST',
-                url: '../Apis/get_Contacts.php',
-                async:false,
-                data: {
-                    Name: textValueOfInput,
-                },
-                error: function (xhr, status) {
-                    alert(status);
-                },
-                success: function(data) {
-                    //when found names sending them in datalist for suggetions
-
-                    var obj = JSON.parse(data);
-
-                    var datas=obj.contacts_data;
-
-                    var options = '';
-
-                    for (var key in datas) {
-                        if (datas.hasOwnProperty(key)) {
-                            options += '<option value="'+datas[key].Name+'" data-id="'+datas[key].id+'"/>';
-                            //alert(key + " -> " + datas[key].Name);
-                        }
-                    }
-                    document.getElementById('suggestions').innerHTML = options;
-
-                    //getting the selected suggetions and searching the comission value for the name and saving in the comission field
-                    $("input[name=Ticket_By]").focusout(function(){
-                        for (var key in datas) {
-                            if (datas.hasOwnProperty(key)) {
-                                if(datas[key].Name==$(this).val())
-                                {
-                                    contact_id=datas[key].id;
-                                    document.getElementById('ticketBy').value = contact_id;
-                                    break;
-                                }
-                            }
-                        }
-                    });
-                }
-
-
-            });
-
-        });
         //checking if pnr already in the database or not
         $("input[name=Pnr]").focusout(function(){
             var pnr= document.getElementById('pnr').value;
@@ -293,58 +295,6 @@
                 }
             });
         });
-        //getting airlines names suggetions
-        $('#airline').on('input', function() {
-
-            var textValueOfInput = $(this).val();
-            //alert(textValueOfInput);
-            //requesting to get all contacts with the starting name in the input field
-            $.ajax({
-                type: 'POST',
-                url: '../Apis/get_Airlines.php',
-                async:false,
-                data: {
-                    Name: textValueOfInput,
-                },
-                error: function (xhr, status) {
-                    alert(status);
-                },
-                success: function(data) {
-                    //when found names sending them in datalist for suggetions
-
-                    var obj = JSON.parse(data);
-
-                    var datas=obj.airlines_data;
-
-                    var options = '';
-                    for (var key in datas) {
-                        if (datas.hasOwnProperty(key)) {
-                            options += '<option value="'+datas[key].Name+'" data-id="'+datas[key].id+'"/>';
-                            //alert(key + " -> " + datas[key].Name);
-                        }
-                    }
-                    document.getElementById('AirlineSuggestions').innerHTML = options;
-
-                    //getting the selected suggetions and searching the comission value for the name and saving in the comission field
-                    $("input[name=Airlines]").focusout(function(){
-                        for (var key in datas) {
-                            if (datas.hasOwnProperty(key)) {
-                                if(datas[key].Name==$(this).val())
-                                {
-                                    contact_id=datas[key].id;
-                                    document.getElementById('airline').value = contact_id;
-                                    break;
-                                }
-                            }
-                        }
-                    });
-                }
-
-
-            });
-
-        });
-
     });
 
 

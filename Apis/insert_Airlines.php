@@ -35,12 +35,12 @@ class InsertDetails{
         if($sqlInsert){
             //success inserted
             echo '<script type="text/javascript">alert("Successfully Inserted !!!");</script>';
-            echo '<script type="text/javascript"> window.open("../pages/dashboard.php","_self");</script>';
+            echo '<script type="text/javascript"> window.open("../pages/NewAirline.php","_self");</script>';
             die();
         }else{
 
             echo '<script type="text/javascript">alert("Error , Try Again!!!");</script>';
-            echo '<script type="text/javascript"> window.open("../pages/Contacts.php","_self");</script>';
+            echo '<script type="text/javascript"> window.open("../pages/NewAirline.php","_self");</script>';
             die();
         }
     }

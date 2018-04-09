@@ -72,11 +72,37 @@
                 <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
             </div>
         </form>
-
+        <?php include('../Apis/get_Contacts_Table.php');  ?>
     </div
 </div>
 
 
+<script>
 
+    function DeleteRow(t,id) {
+        //alert($(t).closest('tr').index());
+        // var rowNumber=$(t).closest('tr').index();
+        //var x = document.getElementById("dataTables").rows[rowNumber+1].cells;
+        //alert(x[7].innerHTML);
+        // var paid=x[7].innerHTML;
+        //var due=x[8].innerHTML;
+        $.ajax({
+            type: 'POST',
+            url: '../Apis/Delete_Contacts.php',
+            data: {
+                id:id
+            },
+            error: function (xhr, status) {
+                alert(status);
+            },
+            success: function(response) {
+                // alert(response);
+                alert("Successfully Deleted Agent")
+                window.open("../pages/Contacts.php","_self");
+            }
+        });
+        //alert(id);
+    }
+</script>
 </body>
 </html>
