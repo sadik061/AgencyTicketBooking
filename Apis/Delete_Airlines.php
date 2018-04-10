@@ -25,6 +25,7 @@ class InsertDetails{
         //cek is the row was inserted or not
         if($sqlInsert){
             //success inserted
+
             echo '<script type="text/javascript">alert("Successfully Deleted Airlines");</script>';
         }else{
             echo '<script type="text/javascript">alert("Unable Deleted Airlines");</script>';

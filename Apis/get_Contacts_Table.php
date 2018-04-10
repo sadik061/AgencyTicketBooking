@@ -26,7 +26,7 @@ class DisplayJsonFood{
             echo '<div class="row">';
             echo '<div class="col-lg-6">';
 
-            echo '<table class="table table-striped table-bordered table-hover" style="margin-top: 4%;">';
+            echo '<table class="table table-striped table-bordered table-hover" id="dataTables" style="margin-top: 4%;">';
             echo '<thead><tr>';
 
             echo '<th>#</th>';

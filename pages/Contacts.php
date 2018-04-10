@@ -86,21 +86,34 @@
         //alert(x[7].innerHTML);
         // var paid=x[7].innerHTML;
         //var due=x[8].innerHTML;
-        $.ajax({
-            type: 'POST',
-            url: '../Apis/Delete_Contacts.php',
-            data: {
-                id:id
-            },
-            error: function (xhr, status) {
-                alert(status);
-            },
-            success: function(response) {
-                // alert(response);
-                alert("Successfully Deleted Agent")
-                window.open("../pages/Contacts.php","_self");
-            }
-        });
+        //alert($(t).closest('tr').index());
+        var rowNumber=$(t).closest('tr').index();
+        var x = document.getElementById("dataTables").rows[rowNumber+1].cells;
+        //alert(x[7].innerHTML);
+        // var paid=x[7].innerHTML;
+        //var due=x[8].innerHTML;
+        var AgentName=x[1].innerHTML;
+        var r = confirm("Are You Sure To Delete "+AgentName+" ?");
+        if (r == true) {
+            $.ajax({
+                type: 'POST',
+                url: '../Apis/Delete_Contacts.php',
+                data: {
+                    id: id
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                },
+                success: function (response) {
+                    // alert(response);
+                    alert("Successfully Deleted Agent")
+                    window.open("../pages/Contacts.php", "_self");
+                }
+            });
+        }
+        else {
+
+        }
         //alert(id);
     }
 </script>
