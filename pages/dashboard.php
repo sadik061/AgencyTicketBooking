@@ -58,7 +58,7 @@
                               <i class="fa fa-plane fa-5x"></i>
                           </div>
                           <div class="col-xs-9 text-right">
-                              <div class="huge">26</div>
+                              <div class="huge" id="flights">0</div>
                               <div>Flights</div>
                           </div>
                       </div>
@@ -80,12 +80,12 @@
                               <i class="fa fa-ticket fa-5x"></i>
                           </div>
                           <div class="col-xs-9 text-right">
-                              <div class="huge">12</div>
-                              <div>Capping</div>
+                              <div class="huge" id="fare">0</div>
+                              <div>Sell</div>
                           </div>
                       </div>
                   </div>
-                  <a href="../pages/AirlinesCapping.php">
+                  <a href="../pages/main.php">
                       <div class="panel-footer">
                           <span class="pull-left">Add New</span>
                           <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -102,8 +102,8 @@
                               <i class="fa fa-bell fa-5x"></i>
                           </div>
                           <div class="col-xs-9 text-right">
-                              <div class="huge">124</div>
-                              <div>Dues</div>
+                              <div class="huge" id="paid">0</div>
+                              <div>Paid</div>
                           </div>
                       </div>
                   </div>
@@ -124,12 +124,12 @@
                               <i class="fa fa-support fa-5x"></i>
                           </div>
                           <div class="col-xs-9 text-right">
-                              <div class="huge">13</div>
-                              <div>Support Tickets!</div>
+                              <div class="huge" id="dues">0</div>
+                              <div>Dues</div>
                           </div>
                       </div>
                   </div>
-                  <a href="#">
+                  <a href="../pages/Dues.php">
                       <div class="panel-footer">
                           <span class="pull-left">View Details</span>
                           <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -220,6 +220,84 @@
                                   }
                               });
                           }
+                          $(document).ready(function() {
+                              var today = new Date();
+                              var nextDay = new Date(today);
+                              nextDay.setDate(today.getDate()+1);
+                              var dd = today.getDate();
+                              var mm = today.getMonth()+1; //January is 0!
+                              var yyyy = today.getFullYear();
+                              if(dd<10) {
+                                  dd = '0'+dd
+                              }
+
+                              if(mm<10) {
+                                  mm = '0'+mm
+                              }
+
+                              today = yyyy + '-' + mm + '-' + dd;
+
+
+                                //getting tomorrow date
+                              var tdd = nextDay.getDate();
+                              var tmm = nextDay.getMonth()+1; //January is 0!
+                              var tyyyy = nextDay.getFullYear();
+                              if(tdd<10) {
+                                  tdd = '0'+tdd
+                              }
+
+                              if(tmm<10) {
+                                  tmm = '0'+tmm
+                              }
+                              nextDay=tyyyy + '-' +tmm + '-' + tdd;
+                              //alert(today+" "+nextDay);
+                              var From=today;
+                              var To=nextDay;
+                              // alert(From+" "+To);
+                              $.ajax({
+                                  type: 'POST',
+                                  url: '../Apis/get_DashBoard_Data.php',
+                                  data: {
+                                      From: From,
+                                      To: To
+                                  }, error: function (xhr, status) {
+                                      alert("error:"+status);
+                                  },
+                                  success: function(response) {
+                                      //alert(response);
+                                      //alert("start");
+                                      var obj = JSON.parse(response);
+                                      //alert("start");
+                                      var datas=obj.Dashboard_data;
+                                     // alert("start");
+                                      var total_Flights=0;
+                                      var total_Fare=0;
+                                      var total_paid=0;
+                                      var total_due=0;
+                                      //alert("start");
+                                      for (var key in datas) {
+                                          if (datas.hasOwnProperty(key)) {
+                                             //alert("in");
+                                              total_Flights+=parseInt(datas[key].Flights);
+                                              total_paid+=parseInt(datas[key].Total_Paid);
+                                              total_due+=parseInt(datas[key].Total_Due);
+                                              total_Fare+=parseInt(datas[key].Total_Fare);
+                                              //alert(key + " -> " + datas[key].Flights);
+                                          }
+                                      }
+                                     // alert(total_Flights);
+                                      document.getElementById("flights").innerHTML = total_Flights;
+                                      document.getElementById("fare").innerHTML = total_Fare;
+                                      document.getElementById("paid").innerHTML = total_paid;
+                                      document.getElementById("dues").innerHTML = total_due;
+
+                                  }
+                              });
+                          });
+
+
+
+
 
                       </script>
 
@@ -231,124 +309,6 @@
           </div>
           <!-- /.panel -->
       </div>
-
-
-
-      <div class="row">
-
-          <div class="col-lg-12">
-      <div class="panel panel-default">
-          <div class="panel-heading">
-              <i class="fa fa-clock-o fa-fw"></i> User Logs
-          </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-              <ul class="timeline">
-                  <li>
-                      <div class="timeline-badge"><i class="fa fa-check"></i>
-                      </div>
-                      <div class="timeline-panel">
-                          <div class="timeline-heading">
-                              <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                              <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago via Twitter</small>
-                              </p>
-                          </div>
-                          <div class="timeline-body">
-                              <p>Lorem ipsum dolor sit amet</p>
-                          </div>
-                      </div>
-                  </li>
-                  <li class="timeline-inverted">
-                      <div class="timeline-badge warning"><i class="fa fa-credit-card"></i>
-                      </div>
-                      <div class="timeline-panel">
-                          <div class="timeline-heading">
-                              <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                              <p>Lorem ipsum dolor sit amet</p>
-                              <p>Lorem ipsum dolor sit amet</p>
-                          </div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="timeline-badge danger"><i class="fa fa-bomb"></i>
-                      </div>
-                      <div class="timeline-panel">
-                          <div class="timeline-heading">
-                              <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                              <p>Lorem ipsum dolor sit amet</p>
-                      </div>
-                  </li>
-                  <li class="timeline-inverted">
-                      <div class="timeline-panel">
-                          <div class="timeline-heading">
-                              <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                              <p>Lorem ipsum dolor sit amet</p>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="timeline-badge info"><i class="fa fa-save"></i>
-                      </div>
-                      <div class="timeline-panel">
-                          <div class="timeline-heading">
-                              <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                              <p>Lorem ipsum dolor sit amet</p>
-                              <hr>
-                              <div class="btn-group">
-                                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                                      <i class="fa fa-gear"></i> <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" role="menu">
-                                      <li><a href="#">Action</a>
-                                      </li>
-                                      <li><a href="#">Another action</a>
-                                      </li>
-                                      <li><a href="#">Something else here</a>
-                                      </li>
-                                      <li class="divider"></li>
-                                      <li><a href="#">Separated link</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="timeline-panel">
-                          <div class="timeline-heading">
-                              <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                              <p>Lorem ipsum dolor sit amet</p>
-                          </div>
-                      </div>
-                  </li>
-                  <li class="timeline-inverted">
-                      <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
-                      </div>
-                      <div class="timeline-panel">
-                          <div class="timeline-heading">
-                              <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                              <p>Lorem ipsum dolor sit amet</p>
-                          </div>
-                      </div>
-                  </li>
-              </ul>
-          </div>
-          <!-- /.panel-body -->
-      </div>
-          </div>
-      </div>
-
 
 
 
