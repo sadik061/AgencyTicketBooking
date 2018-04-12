@@ -59,14 +59,26 @@
                         <form method="post" role="form" action="../AgencyTicketBooking/Apis/Check_Login.php">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus value="<?php if(isset($_COOKIE['remember_me'])) {
+                                        echo $_COOKIE['remember_me'];
+                                    }
+                                    else {
+                                        echo '';
+                                    }
+                                    ?>">
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input type="checkbox" name="remember" value="1"<?php if(isset($_COOKIE['remember_me'])) {
+                                            echo 'checked="checked"';
+                                        }
+                                        else {
+                                            echo '';
+                                        }
+                                        ?> >Remember Me
                                     </label>
                                 </div>
                                 <div class="form-group">

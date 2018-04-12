@@ -15,6 +15,7 @@ class InsertDetails{
         $Password   = $_POST['password'];
 
         try{
+            $year = time() + 31536000;
 
             if(!empty($Email) && !empty($Password))
             {
@@ -29,6 +30,15 @@ class InsertDetails{
                         $_SESSION['Name']=$data['user_Name'];
                         $_SESSION['PhoneNo']=$data['user_PhoneNo'];
                         $_SESSION['Email']=$data['user_Email'];
+                        if($_POST['remember']) {
+                            setcookie('remember_me', $_POST['email'], $year);
+                        }
+                        elseif(!$_POST['remember']) {
+                            if(isset($_COOKIE['remember_me'])) {
+                                $past = time() - 100;
+                                setcookie(remember_me, gone, $past);
+                            }
+                        }
                     }
                     $_SESSION['loggedIn']=true;
 
