@@ -181,7 +181,7 @@
                 To: To
             },
             success: function(response) {
-                window.open("../pages/Dues.php","_self");
+                window.open("../pages/Main_Data.php","_self");
             }
         });
 
