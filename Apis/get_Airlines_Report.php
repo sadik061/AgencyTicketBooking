@@ -14,6 +14,7 @@ class DisplayJsonFood{
         $status="status";
         $message = "message";
         $From=$_SESSION['From'];
+
         $To=$_SESSION['To'];
         // echo $From." ".$To;
         try{

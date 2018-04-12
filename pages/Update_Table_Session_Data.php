@@ -11,5 +11,6 @@ if(!isset($_SESSION))
  */
 //echo '<script type="text/javascript"> alert("v");</script>';
 $_SESSION['From']=$_POST['From'];
-$_SESSION['To']=$_POST['To'];
+$next_date = date('Y-m-d', strtotime($_POST['To'] .' +1 day'));
+$_SESSION['To']=$next_date;
 ?>

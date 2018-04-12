@@ -57,10 +57,8 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label>Airlines.</label>
-                                    <input id="Airlines" name="Airlines" class="form-control" placeholder="Enter text">
-                                    <datalist id="AirlineSuggestions">
-                                        <option value="Black">
-                                    </datalist>
+                                    <select name="Airlines" id="airline" class="form-control">
+                                    </select>
                                 </div>
                                 <div class="col-xs-4">
                                     <label>By</label>
@@ -109,59 +107,37 @@
                 }
 
             }
-            //getting airlines names suggetions
-            $('#Airlines').on('input', function() {
-
-                var textValueOfInput = $(this).val();
-                //alert(textValueOfInput);
-                //requesting to get all contacts with the starting name in the input field
+            $(document).ready(function() {
+                var airlines = document.getElementById("airline");
+                //getting airlines
                 $.ajax({
                     type: 'POST',
                     url: '../Apis/get_Airlines.php',
-                    async:false,
-                    data: {
-                        Name: textValueOfInput,
-                    },
+                    async: false,
+                    data: {},
                     error: function (xhr, status) {
                         alert(status);
                     },
-                    success: function(data) {
+                    success: function (data) {
                         //when found names sending them in datalist for suggetions
 
                         var obj = JSON.parse(data);
 
-                        var datas=obj.airlines_data;
+                        var datas = obj.airlines_data;
 
                         var options = '';
                         for (var key in datas) {
                             if (datas.hasOwnProperty(key)) {
-                                options += '<option value="'+datas[key].Name+'" data-id="'+datas[key].id+'"/>';
-                                //alert(key + " -> " + datas[key].Name);
+                                var option = document.createElement("option");
+                                option.text = datas[key].Name;
+                                option.value = datas[key].id;
+                                airlines.add(option);
                             }
                         }
-                        document.getElementById('AirlineSuggestions').innerHTML = options;
-
-                        //getting the selected suggetions and searching the comission value for the name and saving in the comission field
-                        $("input[name=Airlines]").focusout(function(){
-                            for (var key in datas) {
-                                if (datas.hasOwnProperty(key)) {
-                                    if(datas[key].Name==$(this).val())
-                                    {
-                                        contact_id=datas[key].id;
-                                        document.getElementById('Airlines').value = contact_id;
-                                        break;
-                                    }
-                                }
-                            }
-                        });
                     }
-
-
                 });
 
             });
-
-
 
         </script>
 

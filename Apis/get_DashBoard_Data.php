@@ -12,7 +12,9 @@ class DisplayJsonFood{
         $status="status";
         $message = "message";
         $StartDate=$_POST['From'];
-        $EndDate=$_POST['To'];
+        $next_date = date('Y-m-d', strtotime($_POST['To'] .' +1 day'));
+        $EndDate=$next_date;
+
          //echo $StartDate." ".$EndDate;
         try{
             $sqlQuery = "SELECT 

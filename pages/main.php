@@ -42,7 +42,7 @@
             <h1 class="page-header">Add New Entry</h1>
 
         </div>
-        <form role="form" method="post"  action="../Apis/Insert_Main_Data.php">
+        <form role="form" method="post"  action="../Apis/insert_Main_Data.php">
             <div class="col-lg-8" >
                 <div class="panel panel-default">
                     <div class="panel-heading">

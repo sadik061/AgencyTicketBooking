@@ -14,7 +14,8 @@ class DisplayJsonFood{
         $status="status";
         $message = "message";
         $From=$_POST['From'];
-        $To=$_POST['To'];
+        $next_date = date('Y-m-d', strtotime($_POST['To'] .' +1 day'));
+        $To=$next_date;
          //echo $From." ".$To;
         try{
             $sqlQuery = "SELECT capping_Amount FROM capping WHERE capping_Date >='$From' AND capping_Date<='$To' ORDER BY capping_Date ASC";
