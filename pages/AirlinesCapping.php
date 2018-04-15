@@ -88,7 +88,7 @@
 
 
 
-
+        <?php include('../Apis/get_Capping_Table.php');  ?>
         <!-- Tables-->
 
 
@@ -138,7 +138,37 @@
                 });
 
             });
+            function DeleteRow(t,id) {
+                //alert($(t).closest('tr').index());
+                var rowNumber=$(t).closest('tr').index();
+                var x = document.getElementById("dataTables").rows[rowNumber+1].cells;
+                //alert(x[7].innerHTML);
+                // var paid=x[7].innerHTML;
+                //var due=x[8].innerHTML;
+                var airlinesName=x[1].innerHTML;
+                var r = confirm("Are You Sure To Delete "+airlinesName+" ?");
+                if (r == true) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '../Apis/Delete_Capping.php',
+                        data: {
+                            id:id
+                        },
+                        error: function (xhr, status) {
+                            alert(status);
+                        },
+                        success: function(response) {
+                            // alert(response);
+                            alert("Successfully Deleted Capping")
+                            window.open("../pages/AirlinesCapping.php","_self");
+                        }
+                    });
+                } else {
 
+                }
+
+                //alert(id);
+            }
         </script>
 
 
