@@ -56,8 +56,8 @@
                                     <input id="name" name="Name" class="form-control">
                                 </div>
                                 <div class="col-xs-4">
-                                    <label>Point</label>
-                                    <input id="point" name="point" class="form-control">
+
+                                    <input type="hidden" id="point" name="point" class="form-control">
                                 </div>
 
                             </div>
