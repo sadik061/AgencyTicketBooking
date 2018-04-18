@@ -116,6 +116,39 @@
         }
         //alert(id);
     }
+    function UpdateRow(t,id) {
+        //alert($(t).closest('tr').index());
+        var rowNumber=$(t).closest('tr').index();
+        var x = document.getElementById("dataTables").rows[rowNumber+1].cells;
+        //alert(x[7].innerHTML);
+        // var paid=x[7].innerHTML;
+        //var due=x[8].innerHTML;
+        var agentName=x[1].innerHTML;
+        var agentPhone=x[2].innerHTML;
+        var r = confirm("Are You Sure To Update "+agentName+" with Phone No :"+agentPhone+" ?");
+        if (r == true) {
+            $.ajax({
+                type: 'POST',
+                url: '../Apis/Update_Agent.php',
+                data: {
+                    id:id,
+                    Name:agentName,
+                    Cell_No:agentPhone
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                },
+                success: function(response) {
+                    // alert(response);
+                    alert("Successfully Updated Agent Info")
+                    window.open("../pages/Contacts.php","_self");
+                }
+            });
+        } else {
+
+        }
+        //alert(id);
+    }
 </script>
 </body>
 </html>

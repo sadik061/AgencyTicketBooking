@@ -38,7 +38,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dues</h1>
+                <h1 class="page-header">All Entry's</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -58,11 +58,11 @@
                                     <div class="form-group">
                                         <div class="form-group col-lg-4">
                                             <label >From</label>
-                                            <input id="flownDateFrom" name="Flown_Date_From"  class="datepicker">
+                                            <input id="flownDateFrom" name="Flown_Date_From" value=<?php echo $_SESSION['From'];?>  class="datepicker">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label >To</label>
-                                            <input id="flownDateTo" name="Flown_Date_To"  class="datepicker">
+                                            <input id="flownDateTo" name="Flown_Date_To" value=<?php echo $_SESSION['To'];?> class="datepicker">
                                         </div>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
@@ -73,6 +73,7 @@
 
                             <button type="submit" name="insert_main_data" value="insert_main_data"  class="btn btn-default btn-primary">SUBMIT</button>
                             <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
+                            <button id="print" onclick="printData('page-wrapper')" class="btn btn-default btn-primary">Print</button>
                     </form>
                 </div>
             </div>
@@ -150,21 +151,23 @@
 
     }
     window.onload = function(e) {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1; //January is 0!
-        var yyyy = today.getFullYear();
-        if(dd<10) {
-            dd = '0'+dd
-        }
+        /*
+         var today = new Date();
+         var dd = today.getDate();
+         var mm = today.getMonth()+1; //January is 0!
+         var yyyy = today.getFullYear();
+         if(dd<10) {
+         dd = '0'+dd
+         }
 
-        if(mm<10) {
-            mm = '0'+mm
-        }
+         if(mm<10) {
+         mm = '0'+mm
+         }
 
-        today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("flownDateFrom").value=today;
-        document.getElementById("flownDateTo").value=today;
+         today = yyyy + '-' + mm + '-' + dd;
+         document.getElementById("flownDateFrom").value=today;
+         document.getElementById("flownDateTo").value=today;
+         */
         //load();
     };
     function load()
@@ -186,7 +189,17 @@
         });
 
     }
-
+    function printData(printDiv)
+    {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printDiv).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr+newstr+footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
 </script>
 
 

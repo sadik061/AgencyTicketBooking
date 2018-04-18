@@ -34,6 +34,7 @@ class DisplayJsonFood{
             echo '<th>Phone No</th>';
             echo '<th>Added By</th>';
             echo '<th>Time</th>';
+            echo '<th>Update</th>';
             echo '<th>Delete</th>';
             echo '</tr></thead><tbody>';
             foreach($result as $data)
@@ -44,11 +45,11 @@ class DisplayJsonFood{
                 echo  $data['agent_id'];
                 echo "</td>";
 
-                echo "<td >";
+                echo "<td contenteditable='true' >";
                 echo $data['agent_Name'];
                 echo "</td>";
 
-                echo "<td>";
+                echo "<td contenteditable='true' >";
                 echo $data['agent_PhoneNo'];
                 echo "</td>";
 
@@ -60,6 +61,9 @@ class DisplayJsonFood{
                 echo $data['agent_Input_Time'];
                 echo "</td>";
                 $id=  $data['agent_id'];
+                echo "<td>";
+                echo "<button type=\"button\" id=\"edit\" class=\"btn btn-outline btn-primary\" onclick=\"UpdateRow(this,'$id')\">Update</button>";
+                echo "</td>";
                 echo "<td>";
                 echo "<button type=\"button\" id=\"edit\" class=\"btn btn-outline btn-primary\" onclick=\"DeleteRow(this,'$id')\">Delete</button>";
                 echo "</td>";

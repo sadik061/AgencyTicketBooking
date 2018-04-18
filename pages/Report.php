@@ -58,11 +58,11 @@
                                 <div class="form-group">
                                     <div class="form-group col-lg-4">
                                         <label >From</label>
-                                        <input id="flownDateFrom" value="2018-03-01" name="Flown_Date_From"  class="datepicker">
+                                        <input id="flownDateFrom" value=<?php echo $_SESSION['From'];?> name="Flown_Date_From"  class="datepicker">
                                     </div>
                                     <div class="form-group col-lg-4">
                                         <label >To</label>
-                                        <input id="flownDateTo" value="2018-03-31" name="Flown_Date_To"  class="datepicker">
+                                        <input id="flownDateTo" value=<?php echo $_SESSION['To'];?> name="Flown_Date_To"  class="datepicker">
                                     </div>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -73,6 +73,7 @@
 
                         <button type="submit" name="insert_main_data" value="insert_main_data"  class="btn btn-default btn-primary">SUBMIT</button>
                         <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
+
                 </form>
             </div>
         </div>
@@ -86,6 +87,7 @@
                     var ctx = document.getElementById("myChart").getContext('2d');
                     var myChart=null;
                     window.onload = function(e){
+                        /*
                         var today = new Date();
                         var dd = today.getDate();
                         var mm = today.getMonth()+1; //January is 0!
@@ -101,10 +103,11 @@
                         today = yyyy + '-' + mm + '-' + dd;
                         document.getElementById("flownDateFrom").value=today;
                         document.getElementById("flownDateTo").value=today;
+                        */
                         var default_data={
                             type: 'line',
                             data: {
-                                labels: [today],
+                                labels: [document.getElementById("flownDateFrom").value],
                                 datasets: [{
                                     label: "Sales Dataset",
                                     fillColor: "rgba(220,220,220,0.2)",
@@ -129,12 +132,14 @@
 
 
                     function UpdateData(chart, data,labels, datasetIndex,total_paid,total_due,total_sell) {
+                        //alert(total_paid);
                         chart.data.datasets[datasetIndex].data = data;
                         chart.data.labels = labels;
                         chart.update();
                         document.getElementById("total_payment").innerHTML = total_paid;
                         document.getElementById("total_sell").innerHTML = total_sell;
                         document.getElementById("total_due").innerHTML = total_due;
+
                     }
                     function get_Capping()
                     {
@@ -187,7 +192,7 @@
                                 alert("error:"+status);
                             },
                             success: function(response) {
-
+                                //alert(response);
                                 var obj = JSON.parse(response);
                                 var datas=obj.Report_data;
                                 var labels=[From];
@@ -312,6 +317,18 @@
         }
 
     }
+    function printData(printDiv)
+    {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = document.all.item(printDiv).innerHTML;
+        var oldstr = document.body.innerHTML;
+        document.body.innerHTML = headstr+newstr+footstr;
+        window.print();
+        document.body.innerHTML = oldstr;
+        return false;
+    }
+
 </script>
 
 

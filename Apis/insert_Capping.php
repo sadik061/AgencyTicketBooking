@@ -16,6 +16,7 @@ class InsertDetails{
         //getting user email via login session just to tract who is inserting data or updating data
         $PaymentBy  =  $_POST['PaymentBy'];
         $MCDNo  = $_POST['MCDNo'];
+
         $Date  = $_POST['Date'];
         //getting user email via login session just to tract who is inserting data or updating data
         $Entry_By  =  $_SESSION['id'];
@@ -26,7 +27,7 @@ class InsertDetails{
         try{
             //echo $Name." ".$Cell_No." ".$Point." ".$Comission;
             //echo !empty($Name)." ".!empty($Cell_No)." ".isset($Point)." ".isset($Comission);
-            if(!empty($Amount) && !empty($Airlines)&& !empty($PaymentBy)&& !empty($MCDNo)&& !empty($Date) ){
+            if(!empty($Amount) && !empty($Airlines)&& !empty($PaymentBy)&& !empty($Date) ){
 
                 $sqlInsert = "INSERT INTO capping (capping_id, capping_Amount, capping_Airlines, capping_Payment_By, capping_MCD_No, capping_Date, capping_Entry_By, capping_Input_Time) VALUES (0, '$Amount', '$Airlines', '$PaymentBy', '$MCDNo', '$Date', '$Entry_By', '$input_Time')";
                 $conn->exec($sqlInsert);

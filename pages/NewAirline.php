@@ -85,7 +85,7 @@
         var rowNumber=$(t).closest('tr').index();
         var x = document.getElementById("dataTables").rows[rowNumber+1].cells;
         //alert(x[7].innerHTML);
-       // var paid=x[7].innerHTML;
+        // var paid=x[7].innerHTML;
         //var due=x[8].innerHTML;
         var airlinesName=x[1].innerHTML;
         var r = confirm("Are You Sure To Delete "+airlinesName+" ?");
@@ -108,7 +108,39 @@
         } else {
 
         }
+        //alert(id);
+    }
+    function UpdateRow(t,id) {
+        //alert($(t).closest('tr').index());
+        var rowNumber=$(t).closest('tr').index();
+        var x = document.getElementById("dataTables").rows[rowNumber+1].cells;
+        //alert(x[7].innerHTML);
+       // var paid=x[7].innerHTML;
+        //var due=x[8].innerHTML;
+        var airlinesName=x[1].innerHTML;
+        var airlinesPoint=x[2].innerHTML;
+        var r = confirm("Are You Sure To Update "+airlinesName+" with "+airlinesPoint+"Point ?");
+        if (r == true) {
+            $.ajax({
+                type: 'POST',
+                url: '../Apis/Update_Airlines.php',
+                data: {
+                    id:id,
+                    Name:airlinesName,
+                    Point:airlinesPoint
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                },
+                success: function(response) {
+                    // alert(response);
+                    alert("Successfully Updated Airlines")
+                    window.open("../pages/NewAirline.php","_self");
+                }
+            });
+        } else {
 
+        }
         //alert(id);
     }
 </script>
