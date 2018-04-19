@@ -13,21 +13,26 @@ class InsertDetails{
         //array for json response
         $response = array();
         $id = $_POST['id'];
+        $Name  = $_POST['Name'];
+        $Phone  = $_POST['Cell_No'];
+        $Email   = $_POST['Email'];
+        $Password  = $_POST['Password'];
+        //echo $id." ".$Paid." ".$Due;
         try{
-            if(isset($id)){
-                $sqlInsert = "Delete From agent WHERE agent_id='$id'";
+            if(isset($Name)&&isset($Phone) &&isset($Email)&&isset($Password) && isset($id)){
+                $sqlInsert = "UPDATE user SET user_Name='$Name', user_PhoneNo='$Phone', user_Email='$Email', user_Password='$Password' WHERE user_id='$id'";
                 $conn->exec($sqlInsert);
 
             }
         }catch (PDOException $e){
-            echo '<script type="text/javascript">alert("Error While Deleting");</script>';
+            echo '<script type="text/javascript">alert("Error While Updating Agent Info");</script>';
         }
         //cek is the row was inserted or not
         if($sqlInsert){
             //success inserted
-            echo '<script type="text/javascript">alert("Successfully Deleted Agent");</script>';
+            echo '<script type="text/javascript">alert("Successfully Updated Agent Info");</script>';
         }else{
-            echo '<script type="text/javascript">alert("Unable Deleted Agent");</script>';
+            echo '<script type="text/javascript">alert("Unable To Updated Agent Info");</script>';
         }
     }
 }

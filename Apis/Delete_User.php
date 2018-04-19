@@ -15,7 +15,7 @@ class InsertDetails{
         $id = $_POST['id'];
         try{
             if(isset($id)){
-                $sqlInsert = "Delete From agent WHERE agent_id='$id'";
+                $sqlInsert = "Delete From user WHERE user_id='$id'";
                 $conn->exec($sqlInsert);
 
             }
@@ -25,9 +25,9 @@ class InsertDetails{
         //cek is the row was inserted or not
         if($sqlInsert){
             //success inserted
-            echo '<script type="text/javascript">alert("Successfully Deleted Agent");</script>';
+            echo '<script type="text/javascript">alert("Successfully Deleted User");</script>';
         }else{
-            echo '<script type="text/javascript">alert("Unable Deleted Agent");</script>';
+            echo '<script type="text/javascript">alert("Unable Deleted User");</script>';
         }
     }
 }
