@@ -14,6 +14,7 @@ $_SESSION['id']=null;
 $_SESSION['Name']=null;
 $_SESSION['PhoneNo']=null;
 $_SESSION['Email']=null;
+$_SESSION['User_Type']=null;
 
 $_SESSION['loggedIn']=false;
 session_destroy();

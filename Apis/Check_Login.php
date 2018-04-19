@@ -13,6 +13,14 @@ class InsertDetails{
         $response = array();
         $Email   = $_POST['email'];
         $Password   = $_POST['password'];
+        if(!isset($_POST['remember'])||empty($_POST['remember']))
+        {
+            $rem=0;
+        }
+        else
+        {
+            $rem=$_POST['remember'];
+        }
 
         try{
             $year = time() + 31536000;
@@ -31,10 +39,10 @@ class InsertDetails{
                         $_SESSION['PhoneNo']=$data['user_PhoneNo'];
                         $_SESSION['Email']=$data['user_Email'];
                         $_SESSION['User_Type']=$data['user_Role'];
-                        if($_POST['remember']) {
+                        if($rem) {
                             setcookie('remember_me', $_POST['email'], $year);
                         }
-                        elseif(!$_POST['remember']) {
+                        elseif(!$rem) {
                             if(isset($_COOKIE['remember_me'])) {
                                 $past = time() - 100;
                                 setcookie(remember_me, gone, $past);

@@ -30,10 +30,29 @@
         }
         else
         {
+
             if($_SESSION['loggedIn']==false)
             {
                 echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
                 exit();
+            }
+
+            if(!isset($_SESSION['User_Type']))
+            {
+
+                echo '<script type="text/javascript"> window.open("../index.php","_self");</script>';            //  On Successful Login redirects to home.php
+                exit();
+            }
+            else{
+
+                $user_Type=$_SESSION['User_Type'];
+                //echo $user_Type;
+                if($user_Type == "Moderator")
+                {
+
+                    echo '<script type="text/javascript"> window.open("../pages/dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
+                    exit();
+                }
             }
         }
 
