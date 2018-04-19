@@ -39,10 +39,10 @@
 
         ?>
         <div class="col-lg-12">
-            <h1 class="page-header">Add new member</h1>
+            <h1 class="page-header">Add new Moderator</h1>
 
         </div>
-        <form role="form" method="post"  action="../Apis/insert_contacts.php">
+        <form role="form" method="post"  action="../Apis/insert_User.php">
             <div class="col-lg-12" >
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -59,7 +59,20 @@
                                     <label>Phone No.</label>
                                     <input id="cellNo" name="Cell_No" class="form-control" placeholder="Enter text">
                                 </div>
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-11">
 
+                                <div class="col-xs-3">
+                                    <label>Email</label>
+                                    <input id="email" name="Email" class="form-control" placeholder="Enter text">
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Password</label>
+                                    <input id="password" name="Password" class="form-control" placeholder="Enter text">
+                                </div>
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                         </div>
@@ -72,7 +85,7 @@
                 <button type="reset" onclick="reset()" class="btn btn-default btn-primary">RESET</button>
             </div>
         </form>
-        <?php include('../Apis/get_Contacts_Table.php');  ?>
+        <?php include('../Apis/get_User_Table.php');  ?>
     </div
 </div>
 
@@ -92,12 +105,12 @@
         //alert(x[7].innerHTML);
         // var paid=x[7].innerHTML;
         //var due=x[8].innerHTML;
-        var AgentName=x[1].innerHTML;
-        var r = confirm("Are You Sure To Delete "+AgentName+" ?");
+        var UserName=x[1].innerHTML;
+        var r = confirm("Are You Sure To Delete "+UserName+" ?");
         if (r == true) {
             $.ajax({
                 type: 'POST',
-                url: '../Apis/Delete_Contacts.php',
+                url: '../Apis/Delete_User.php',
                 data: {
                     id: id
                 },
@@ -106,8 +119,8 @@
                 },
                 success: function (response) {
                     // alert(response);
-                    alert("Successfully Deleted Agent");
-                    window.open("../pages/Contacts.php", "_self");
+                    alert("Successfully Deleted User");
+                    window.open("../pages/Moderators.php", "_self");
                 }
             });
         }
@@ -123,25 +136,29 @@
         //alert(x[7].innerHTML);
         // var paid=x[7].innerHTML;
         //var due=x[8].innerHTML;
-        var agentName=x[1].innerHTML;
-        var agentPhone=x[2].innerHTML;
-        var r = confirm("Are You Sure To Update "+agentName+" with Phone No :"+agentPhone+" ?");
+        var UserName=x[1].innerHTML;
+        var UserPhone=x[2].innerHTML;
+        var UserEmail=x[3].innerHTML;
+        var UserPassword=x[4].innerHTML;
+        var r = confirm("Are You Sure To Update "+UserName+" with Phone No :"+UserPhone+" ?");
         if (r == true) {
             $.ajax({
                 type: 'POST',
-                url: '../Apis/Update_Agent.php',
+                url: '../Apis/Update_User.php',
                 data: {
                     id:id,
-                    Name:agentName,
-                    Cell_No:agentPhone
+                    Name:UserName,
+                    Cell_No:UserPhone,
+                    Email:UserEmail,
+                    Password:UserPassword
                 },
                 error: function (xhr, status) {
                     alert(status);
                 },
                 success: function(response) {
                     // alert(response);
-                    alert("Successfully Updated Agent Info");
-                    window.open("../pages/Contacts.php","_self");
+                    alert("Successfully Updated User Info");
+                    window.open("../pages/Moderators.php","_self");
                 }
             });
         } else {

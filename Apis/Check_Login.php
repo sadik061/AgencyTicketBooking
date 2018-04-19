@@ -30,6 +30,7 @@ class InsertDetails{
                         $_SESSION['Name']=$data['user_Name'];
                         $_SESSION['PhoneNo']=$data['user_PhoneNo'];
                         $_SESSION['Email']=$data['user_Email'];
+                        $_SESSION['User_Type']=$data['user_Role'];
                         if($_POST['remember']) {
                             setcookie('remember_me', $_POST['email'], $year);
                         }
