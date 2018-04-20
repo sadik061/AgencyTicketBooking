@@ -75,10 +75,7 @@ body {
   padding: 15px;
 }
 .sidebar ul li {
-  border-bottom: 1px solid #e7e7e7;
-}
-.sidebar ul li a.active {
-  background-color: #eeeeee;
+  border-bottom: 1px solid #001990;
 }
 .sidebar .arrow {
   float: right;
@@ -431,4 +428,41 @@ table.dataTable thead .sorting:after {
     border-right-width: 14px;
     border-left-width: 0;
   }
+}
+
+.sidebar .sidebar-nav.navbar-collapse {
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #001990;
+  padding-bottom: 164%;
+}
+.nav > li > a{
+  color: white;
+}
+.sidebar ul li a.active {
+  background-color: #f2b022;
+  color: #0f2758;
+}
+.navbar-default {
+  background-color: #001990;
+  border-color: #5e82a68c;
+}
+.nav > li > a.navbar-top-links {
+  background-color: #bcddff;
+}
+.sidebar ul li {
+  border-bottom: 1px solid #5e82a68c;
+}
+.navbar-default .navbar-brand {
+  color: #e4e4e4;
+}
+.navbar-brand {
+  font-size: 27px;
+}
+.sidebar .nav .open>a, .nav .open>a:focus, .nav .open>a {
+  background-color: #003d90;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+  text-decoration: none;
+  background-color: #003d90;
 }
