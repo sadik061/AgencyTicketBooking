@@ -148,7 +148,7 @@
               <div class="input-group custom-search-form">
               <input type="text" id="pnr" class="form-control" placeholder="Search PNR...">
               <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" onclick="loadPNR()">
+                                <button class="btn btn-default" id="loadpnr" type="button" onclick="loadPNR()">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -158,17 +158,28 @@
           <div class="input-group custom-search-form">
               <input type="text" id="agent" class="form-control" placeholder="Search Agent mobile number...">
               <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" onclick="loadAgent()">
+                                    <button class="btn btn-default" id="loadagent" type="button" onclick="loadAgent()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
           </div>
           </div>
+          <br><br><br>
+          <div class="col-lg-6">
+              <div class="input-group custom-search-form">
+                  <input type="text" id="client" class="form-control" placeholder="Search Client mobile number...">
+                  <span class="input-group-btn">
+                                    <button class="btn btn-default" id="loadclient" type="button" onclick="loadClient()">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+              </div>
+          </div>
       </div>
       <div class="col-lg-12">
           <div class="panel panel-default">
               <div class="panel-heading">
-                  DataTables Advanced Tables
+                  All Data
               </div>
               <!-- /.panel-heading -->
               <div class="panel-body">
@@ -212,6 +223,21 @@
                                   url: '../Apis/get_Dashboard_Agent.php',
                                   data: {
                                       Agent: agent
+                                  },
+                                  success: function(response) {
+                                      //alert(response);
+                                      document.getElementById("tbody").innerHTML=response;
+                                      //window.open("../pages/Airlines.php","_self");
+                                  }
+                              });
+                          }
+                          function loadClient() {
+                              var client=document.getElementById("client").value;
+                              $.ajax({
+                                  type: 'POST',
+                                  url: '../Apis/get_Dashboard_Client.php',
+                                  data: {
+                                      client: client
                                   },
                                   success: function(response) {
                                       //alert(response);
@@ -317,7 +343,44 @@
 
 
 
+<script>
 
+    // Get the input field
+    var pnr = document.getElementById("pnr");
+    var agent = document.getElementById("agent");
+    var client = document.getElementById("client");
+
+    // Execute a function when the user releases a key on the keyboard
+    pnr.addEventListener("keyup", function(event) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Trigger the button element with a click
+            document.getElementById("loadpnr").click();
+        }
+    });
+    // Execute a function when the user releases a key on the keyboard
+    agent.addEventListener("keyup", function(event) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Trigger the button element with a click
+            document.getElementById("loadagent").click();
+        }
+    });
+    // Execute a function when the user releases a key on the keyboard
+    client.addEventListener("keyup", function(event) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Trigger the button element with a click
+            document.getElementById("loadclient").click();
+        }
+    });
+</script>
 
 
 </body>
