@@ -1,36 +1,7 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
-            <!--
-            <li class="sidebar-search">
-                <div class="input-group custom-search-form">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
-                </div>
-           </li>
-           -->
-            <!-- /input-group -->
-            <!--
-            <li>
-                <a href="../pages/templates/index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="flot.html">Flot Charts</a>
-                    </li>
-                    <li>
-                        <a href="morris.html">Morris.js Charts</a>
-                    </li>
-                </ul>
 
-            </li>
-            -->
             <li>
                 <a href="../pages/dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
@@ -60,79 +31,42 @@
             <li>
                 <a href="../pages/Flights.php"><i class="fa fa-plane fa-fw"></i> Flights</a>
             </li>
+
             <li>
-                <a href="../pages/Dues.php"><i class="fa fa-bell fa-fw"></i> Dues</a>
+                <a href="#"><i class="fa fa-group fa-fw"></i> Payment<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+
+                    <?php include('../pages/scripts/Super_User_Access.php');  ?>
+                    <li>
+                        <a href="../pages/Dues.php"><i class="fa fa-bell fa-fw"></i> Dues</a>
+                    </li>
+                    <li>
+                        <a href="../pages/PaymentByClient.php">Payment By Client</a>
+                    </li>
+                    <li>
+                        <a href="../pages/PaymentByAgent.php">Payment By Agent</a>
+                    </li>
+                </ul>
             </li>
             <li>
-                <a href="../pages/Airlines.php"><i class="fa fa-send fa-fw"></i> Airlines</a>
+                <a href="#"><i class="fa fa-group fa-fw"></i> History<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+
+                    <?php include('../pages/scripts/Super_User_Access.php');  ?>
+
+                    <li>
+                        <a href="../pages/PaymentHistory.php">Payment History</a>
+                    </li>
+                    <li>
+                        <a href="../pages/Airlines.php"><i class="fa fa-send fa-fw"></i> Airlines History</a>
+                    </li>
+                </ul>
             </li>
+
             <li>
                 <a href="../pages/Report.php"><i class="fa fa-bar-chart-o fa-fw"></i> Report</a>
             </li>
-            <!--
-            <li>
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Report<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="../pages/Report.php">Daily statistics</a>
-                    </li>
-                    <li>
-                        <a href="buttons.html">Monthly statistics</a>
-                    </li>
-                    <li>
-                        <a href="icons.html"> Total Capping</a>
-                    </li>
-                    <li>
-                        <a href="grid.html">Highest pax</a>
-                    </li>
-                </ul>
 
-            </li>
-            -->
-            <!--
-            <li>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                        </ul>
-
-                    </li>
-                </ul>
-
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="blank.html">Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="login.html">Login Page</a>
-                    </li>
-                </ul>
-
-            </li>
-            -->
         </ul>
     </div>
 </div>

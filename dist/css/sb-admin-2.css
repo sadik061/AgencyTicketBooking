@@ -433,7 +433,7 @@ table.dataTable thead .sorting:after {
 .sidebar .sidebar-nav.navbar-collapse {
   padding-left: 0;
   padding-right: 0;
-  background-color: #001990;
+  background-color: #36393a;
   padding-bottom: 164%;
 }
 .nav > li > a{
@@ -441,10 +441,10 @@ table.dataTable thead .sorting:after {
 }
 .sidebar ul li a.active {
   background-color: #f2b022;
-  color: #0f2758;
+  color: #0f1213d4;
 }
 .navbar-default {
-  background-color: #001990;
+  background-color: #0f1213d4;
   border-color: #5e82a68c;
 }
 .nav > li > a.navbar-top-links {
@@ -464,5 +464,5 @@ table.dataTable thead .sorting:after {
 }
 .nav>li>a:focus, .nav>li>a:hover {
   text-decoration: none;
-  background-color: #003d90;
+  background-color: #f2b022;
 }

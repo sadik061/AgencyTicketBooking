@@ -137,7 +137,6 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-11">
-
                                 <div class="form-group">
                                     <label style="width: 31%;">Date</label>
                                     <input type="text" id="Date" name="Date" data-field="date" readonly/>

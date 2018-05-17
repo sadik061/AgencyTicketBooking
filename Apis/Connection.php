@@ -10,7 +10,7 @@ class Connection{
     function getConnection(){
         $host       = "localhost";
         $username   = "root";
-        $password   = "000000";
+        $password   = "";
         $dbname     = "travelagency";
         try{
             $conn    = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
