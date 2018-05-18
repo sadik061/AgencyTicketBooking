@@ -15,7 +15,7 @@ class InsertDetails{
         $id = $_POST['id'];
         $Paid   = $_POST['Paid'];
         $Due  = $_POST['Due'];
-        echo $id." ".$Paid." ".$Due;
+       // echo $id." ".$Paid." ".$Due;
         try{
             if( isset($Due)&&isset($Paid) && isset($id)){
                 $sqlInsert = "UPDATE maindata SET maindata_Paid='$Paid', maindata_Due='$Due' WHERE maindata_id='$id'";
@@ -23,12 +23,12 @@ class InsertDetails{
 
             }
         }catch (PDOException $e){
-            echo '<script type="text/javascript">alert("Error While Updating Contact Point");</script>';
+            echo '<script type="text/javascript">alert("Error While Updating Paid Due Amount");</script>';
         }
         //cek is the row was inserted or not
         if($sqlInsert){
             //success inserted
-            echo '<script type="text/javascript">alert("Successfully Updated Paid Dume Amount");</script>';
+            echo '<script type="text/javascript">alert("Successfully Updated Paid Due Amount");</script>';
         }else{
             echo '<script type="text/javascript">alert("Unable To Updated Paid Due Amount");</script>';
         }

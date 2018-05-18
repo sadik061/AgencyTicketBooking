@@ -48,23 +48,24 @@
                     <div class="panel-heading">
                         Payment
                     </div>
-                    <form role="form" method="post" onsubmit="load()">
+                    <form role="form" method="post" action="../Apis/insert_payment.php">
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-11">
                                     <div class="form-group">
                                         <div class="form-group col-lg-4">
                                             <label >Contact Number :</label>
-                                            <input id="flownDateFrom" name="Flown_Date_From" value="" class="text">
+                                            <input id="PaymentPhoneNo" name="PaymentPhoneNo" value="" class="text">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label >Amount :</label>
-                                            <input id="flownDateFrom" name="Flown_Date_From" value="" class="text">
+                                            <input id="PaymentAmount" name="PaymentAmount" value="" class="text">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label >Date :</label>
-                                            <input id="flownDateFrom" name="Flown_Date_From" value=<?php echo $_SESSION['From'];?> class="datepicker">
+                                            <input id="PaymentDate" name="PaymentDate" value=<?php echo $_SESSION['From'];?> class="datepicker">
                                         </div>
+                                        <input type="hidden" id="PaymentBy" name="PaymentBy" value="agent" class="text">
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
@@ -83,7 +84,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Search By Client Mobile Number
+                            Search By Agent Mobile Number
                         </div>
                         <form role="form" method="post" onsubmit="load(); return false;">
                             <div class="panel-body">
@@ -228,7 +229,7 @@
                             i++;
                         }
                     }
-                    document.getElementById("due").innerHTML="Total Paid : "+due;
+                    document.getElementById("due").innerHTML="Total Due : "+due;
 
                 }
             });

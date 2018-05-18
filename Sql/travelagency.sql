@@ -72,4 +72,15 @@ CREATE TABLE `maindata` (
   foreign key (maindata_Airlines) references airlines(airlines_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `payment` (
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `payment_PhoneNo` varchar(255) DEFAULT NULL,
+  `payment_By` int(11) DEFAULT NULL,
+  `payment_Amount` DOUBLE DEFAULT NULL,
+  `payment_Date` datetime DEFAULT NULL,
+  `payment_Input_Time` datetime DEFAULT NULL,
+  PRIMARY KEY (payment_id),
+  foreign key (payment_By) references agent(agent_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 

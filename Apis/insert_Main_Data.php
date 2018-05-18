@@ -32,6 +32,9 @@ class InsertDetails{
         $Pax  = $_POST['Pax'];
         $Route  = $_POST['Route'];
         $Airlines  = $_POST['Airlines'];
+        date_default_timezone_set('Asia/Dhaka');
+        // Then call the date functions
+        $input_Time = date('Y-m-d H:i:s');
         try{
             //echo $Ticket_By." ".$Airlines." ";
             /*
@@ -48,10 +51,14 @@ class InsertDetails{
             if(!empty($Name) && !empty($PhoneNo) && isset($Fare) && isset($Paid) && isset($Due)&& isset($Commission)&& !empty($Ticket_By)&&
                 !empty($Comment)&& isset($Point)&& !empty($Date)&& !empty($Flown_Date)&& !empty($Pnr)&& !empty($Pax)&& !empty($Route)&& !empty($Airlines)){
 
-                $sqlInsert = "INSERT INTO maindata (maindata_id, maindata_Name, maindata_PhoneNo, maindata_Fare, maindata_Paid, maindata_Due, maindata_Commission,
+                $sqlInsert = "INSERT INTO maindata (maindata_id, maindata_Name, maindata_PhoneNo, 
+                maindata_Fare, maindata_Paid, maindata_Due, maindata_Commission,
                 maindata_Entry_By, maindata_Input_Time, maindata_Ticket_By, maindata_Comment,
-                maindata_Point, maindata_Date, maindata_Flown_Date, maindata_Pnr, maindata_Pax, maindata_Route, maindata_Airlines) VALUES (0, '$Name', '$PhoneNo', '$Fare', '$Paid', '$Due', '$Commission'
-                , '$Entry_By', '$input_Time', '$Ticket_By', '$Comment', '$Point', '$Date', '$Flown_Date', '$Pnr', '$Pax', '$Route', '$Airlines')";
+                maindata_Point, maindata_Date, maindata_Flown_Date, maindata_Pnr, maindata_Pax, 
+                maindata_Route, maindata_Airlines) 
+                VALUES (0, '$Name', '$PhoneNo', '$Fare', '$Paid', '$Due', '$Commission'
+                , '$Entry_By', '$input_Time', '$Ticket_By', '$Comment', '$Point', '$Date',
+                 '$Flown_Date', '$Pnr', '$Pax', '$Route', '$Airlines')";
                 $conn->exec($sqlInsert);
             }
 
