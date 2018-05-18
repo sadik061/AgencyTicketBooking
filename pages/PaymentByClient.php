@@ -38,7 +38,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Payment</h1>
+                <h1 class="page-header">Client Payment</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -85,14 +85,14 @@
                         <div class="panel-heading">
                             Search By Client Mobile Number
                         </div>
-                        <form role="form" method="post" onsubmit="load()">
+                        <form role="form" method="post" onsubmit="load(); return false;">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-11">
                                         <div class="form-group">
                                             <div class="form-group col-lg-4">
                                                 <label >Contact Number :</label>
-                                                <input id="flownDateFrom" name="Flown_Date_From" value="" class="text">
+                                                <input id="Phone" name="Phone" value="" class="text">
                                             </div>
                                         </div>
                                         <!-- /.col-lg-6 (nested) -->
@@ -109,6 +109,10 @@
 
                 <div class="col-lg-12">
                     <div class="panel panel-default">
+
+                        <div class="panel-heading" id="due">
+                            Total Due : 0
+                        </div>
                         <div class="panel-heading">
                             Search Result
                         </div>
@@ -126,13 +130,12 @@
                                     <th>Route</th>
                                     <th>Paid</th>
                                     <th>Due</th>
-                                    <th>Action</th>
+
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="tbody">
 
 
-                                <?php include('../Apis/get_Paid_Due.php');  ?>
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
@@ -147,7 +150,94 @@
     </div>
 
 
+<script>
 
+    function load()
+    {
+        var Phone=document.getElementById("Phone").value;
+        $("#dataTables").empty();
+
+        $.ajax({
+            type: 'POST',
+            url: '../Apis/get_Client_Due.php',
+            async: false,
+            data: {
+                Phone :Phone
+            },
+            error: function (ts) {
+                alert(ts.responseText);
+            },
+            success: function (data) {
+                //when found names sending them in datalist for suggetions
+                //alert(data);
+                var table = document.getElementById("dataTables");
+
+                var row = table.insertRow(0);
+                row.className='table table-striped table-bordered table-hover';
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                var cell6 = row.insertCell(5);
+                var cell7 = row.insertCell(6);
+                var cell8 = row.insertCell(7);
+                var cell9 = row.insertCell(8);
+                cell1.innerHTML = "Flight Date";
+                cell2.innerHTML = "Flight Time";
+                cell3.innerHTML = "PNR";
+                cell4.innerHTML = "Name";
+                cell5.innerHTML = "Cell Phone";
+                cell6.innerHTML = "Airline";
+                cell7.innerHTML = "Route";
+                cell8.innerHTML = "Paid";
+                cell9.innerHTML = "Due";
+
+                var obj = JSON.parse(data);
+
+                var datas=obj.client_due_data;
+                var count = Object.keys(datas).length;
+                if(count == 0)
+                    alert("No Data Found");
+                var i=1;
+
+                var due=0;
+                for (var key in datas) {
+                    if (datas.hasOwnProperty(key)) {
+                        //alert(datas[key].Flown_Date);
+                        var table = document.getElementById("dataTables");
+
+                        var row = table.insertRow(i);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        var cell6 = row.insertCell(5);
+                        var cell7 = row.insertCell(6);
+                        var cell8 = row.insertCell(7);
+                        var cell9 = row.insertCell(8);
+                        cell1.innerHTML = ""+datas[key].Flown_Date;
+                        cell2.innerHTML = ""+datas[key].Flown_Time;
+                        cell3.innerHTML = ""+datas[key].Pnr;
+                        cell4.innerHTML = ""+datas[key].Name;
+                        cell5.innerHTML = ""+datas[key].Cell_No;
+                        cell6.innerHTML = ""+datas[key].Airlines;
+                        cell7.innerHTML = ""+datas[key].Route;
+                        cell8.innerHTML = ""+datas[key].Paid;
+                        cell9.innerHTML = ""+datas[key].Due;
+
+                        due+=parseInt(datas[key].Due);
+                        i++;
+                    }
+                }
+
+                document.getElementById("due").innerHTML="Total Paid : "+due;
+
+            }
+        });
+    }
+</script>
 
 
 
