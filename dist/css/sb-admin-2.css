@@ -437,10 +437,13 @@ table.dataTable thead .sorting:after {
   padding-bottom: 164%;
 }
 .nav > li > a{
-  color: white;
+  color: #ffffff8f;
+}
+.nav > li > a:hover{
+  color: black;
 }
 .sidebar ul li a.active {
-  background-color: #f2b022;
+  background-color: #efefef;
   color: #0f1213d4;
 }
 .navbar-default {
@@ -462,7 +465,12 @@ table.dataTable thead .sorting:after {
 .sidebar .nav .open>a, .nav .open>a:focus, .nav .open>a {
   background-color: #003d90;
 }
-.nav>li>a:focus, .nav>li>a:hover {
+.nav>li>a:hover {
   text-decoration: none;
-  background-color: #f2b022;
+  background-color: #efefef;
+}
+.nav>li>a:focus{
+    text-decoration: none;
+    background-color: #efefef00;
+    color: white;
 }
