@@ -15,7 +15,9 @@ if(isset($_SESSION['loggedIn']))   // Checking whether the session is already th
 {
     if($_SESSION['loggedIn']!=false)
     {
-        echo '<script type="text/javascript"> window.open("http://theicthub.com/ticketbooking/pages/dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
+
+
+        echo '<script type="text/javascript"> window.open("../pages/dashboard.php","_self");</script>';            //  On Successful Login redirects to home.php
         exit();
     }
     /* Redirect browser */
@@ -29,7 +31,7 @@ if(isset($_SESSION['loggedIn']))   // Checking whether the session is already th
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <form method="post" role="form" action="http://theicthub.com/ticketbooking/Apis/Check_Login.php">
+                    <form method="post" role="form" action="../Apis/Check_Login.php">
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>

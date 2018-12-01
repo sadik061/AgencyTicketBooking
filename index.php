@@ -1,4 +1,4 @@
 <?php
-header("Location: http://theicthub.com/ticketbooking/pages/login.php");
+header("Location: http://localhost/AgencyTicketBooking/pages/login.php");
 exit;
 ?>
